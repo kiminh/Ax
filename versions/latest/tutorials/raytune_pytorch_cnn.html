@@ -378,7 +378,7 @@ function slice_config_to_trace(
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:58:19] ipy_plotting: Injecting Plotly library into cell. Do not overwrite or delete cell.
+<pre>[INFO 04-19 03:59:02] ipy_plotting: Injecting Plotly library into cell. Do not overwrite or delete cell.
 </pre>
 </div>
 </div>
@@ -432,7 +432,7 @@ function slice_config_to_trace(
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:58:19] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 2 decimal points.
+<pre>[INFO 04-19 03:59:02] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 2 decimal points.
 </pre>
 </div>
 </div>
@@ -468,7 +468,7 @@ function slice_config_to_trace(
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:58:19] ax.modelbridge.dispatch_utils: Using Bayesian Optimization generation strategy: GenerationStrategy(name='Sobol+GPEI', steps=[Sobol for 5 trials, GPEI for subsequent trials]). Iterations after 5 will take longer to generate due to  model-fitting.
+<pre>[INFO 04-19 03:59:02] ax.modelbridge.dispatch_utils: Using Bayesian Optimization generation strategy: GenerationStrategy(name='Sobol+GPEI', steps=[Sobol for 5 trials, GPEI for subsequent trials]). Iterations after 5 will take longer to generate due to  model-fitting.
 </pre>
 </div>
 </div>
@@ -532,508 +532,469 @@ function slice_config_to_trace(
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2020-04-18 03:58:19,946	INFO resource_spec.py:212 -- Starting Ray with 4.35 GiB memory available for workers and up to 2.18 GiB for objects. You can adjust these settings with ray.init(memory=&lt;bytes&gt;, object_store_memory=&lt;bytes&gt;).
-2020-04-18 03:58:20,304	INFO services.py:1148 -- View the Ray dashboard at <span class="ansi-green-intense-fg ansi-bold">localhost:8265</span>
-[INFO 04-18 03:58:20] ax.service.ax_client: Generated new trial 0 with parameters {'lr': 0.0, 'momentum': 0.8}.
-[INFO 04-18 03:58:20] ax.service.ax_client: Generated new trial 1 with parameters {'lr': 0.21, 'momentum': 0.4}.
-[INFO 04-18 03:58:20] ax.service.ax_client: Generated new trial 2 with parameters {'lr': 0.0, 'momentum': 0.46}.
-[INFO 04-18 03:58:20] ax.service.ax_client: Generated new trial 3 with parameters {'lr': 0.02, 'momentum': 0.75}.
-[INFO 04-18 03:58:21] ax.service.ax_client: Generated new trial 4 with parameters {'lr': 0.1, 'momentum': 0.33}.
-[INFO 04-18 03:58:21] ax.service.ax_client: Generated new trial 5 with parameters {'lr': 0.0, 'momentum': 0.32}.
-[INFO 04-18 03:58:21] ax.service.ax_client: Generated new trial 6 with parameters {'lr': 0.0, 'momentum': 0.34}.
-[INFO 04-18 03:58:21] ax.service.ax_client: Generated new trial 7 with parameters {'lr': 0.14, 'momentum': 0.21}.
-[INFO 04-18 03:58:22] ax.service.ax_client: Generated new trial 8 with parameters {'lr': 0.0, 'momentum': 0.11}.
-[INFO 04-18 03:58:22] ax.service.ax_client: Generated new trial 9 with parameters {'lr': 0.0, 'momentum': 0.09}.
+<pre>2020-04-19 03:59:02,948	INFO resource_spec.py:212 -- Starting Ray with 4.35 GiB memory available for workers and up to 2.18 GiB for objects. You can adjust these settings with ray.init(memory=&lt;bytes&gt;, object_store_memory=&lt;bytes&gt;).
+2020-04-19 03:59:03,302	INFO services.py:1148 -- View the Ray dashboard at <span class="ansi-green-intense-fg ansi-bold">localhost:8265</span>
+[INFO 04-19 03:59:03] ax.service.ax_client: Generated new trial 0 with parameters {'lr': 0.0, 'momentum': 0.72}.
+[INFO 04-19 03:59:03] ax.service.ax_client: Generated new trial 1 with parameters {'lr': 0.13, 'momentum': 0.95}.
+[INFO 04-19 03:59:03] ax.service.ax_client: Generated new trial 2 with parameters {'lr': 0.0, 'momentum': 0.57}.
+[INFO 04-19 03:59:03] ax.service.ax_client: Generated new trial 3 with parameters {'lr': 0.01, 'momentum': 0.65}.
+[INFO 04-19 03:59:04] ax.service.ax_client: Generated new trial 4 with parameters {'lr': 0.0, 'momentum': 0.26}.
+[INFO 04-19 03:59:04] ax.service.ax_client: Generated new trial 5 with parameters {'lr': 0.0, 'momentum': 0.4}.
+[INFO 04-19 03:59:04] ax.service.ax_client: Generated new trial 6 with parameters {'lr': 0.0, 'momentum': 0.84}.
+[INFO 04-19 03:59:04] ax.service.ax_client: Generated new trial 7 with parameters {'lr': 0.0, 'momentum': 0.97}.
+[INFO 04-19 03:59:05] ax.service.ax_client: Generated new trial 8 with parameters {'lr': 0.0, 'momentum': 0.88}.
+[INFO 04-19 03:59:05] ax.service.ax_client: Generated new trial 9 with parameters {'lr': 0.0, 'momentum': 0.75}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4130)</span> Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz
-<span class="ansi-cyan-fg">(pid=4130)</span> 2020-04-18 03:58:24,716	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4131)</span> Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz
-<span class="ansi-cyan-fg">(pid=4131)</span> 2020-04-18 03:58:24,731	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4076)</span> Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz
+<span class="ansi-cyan-fg">(pid=4076)</span> 2020-04-19 03:59:07,980	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4077)</span> 2020-04-19 03:59:08,019	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4077)</span> Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz
+0.4%
 0.1%
-0.1%
-1.3%
-0.9%
-1.6%
-1.7%
-9.2%
-4.4%
-9.8%
-9.9%
-10.1%
-10.3%
-11.2%
-4.5%
-11.6%
-4.8%
-12.2%
-4.9%
-12.8%
-5.0%
-13.8%
-14.0%
-57.9%
-9.8%
-60.5%
-100.1%
-13.1%
-13.5%
-14.0%
-14.0%
-14.2%
-<span class="ansi-cyan-fg">(pid=4130)</span> Extracting /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
-19.1%
-24.4%
-28.3%
-34.0%
-38.3%
-44.0%
-<span class="ansi-cyan-fg">(pid=4130)</span> Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz
-49.8%
-53.9%
-<span class="ansi-cyan-fg">(pid=4130)</span> Extracting /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
-<span class="ansi-cyan-fg">(pid=4130)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz
-113.5%
-59.6%
-64.2%
-0.5%
-69.9%
-2.5%
-75.7%
-75.8%
+11.7%
+1.8%
 12.4%
-80.9%
-93.4%
-86.5%
-100.4%
-<span class="ansi-cyan-fg">(pid=4130)</span> Extracting /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
-91.5%
-<span class="ansi-cyan-fg">(pid=4130)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz
-97.3%
-97.7%
-<span class="ansi-cyan-fg">(pid=4130)</span> Extracting /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
-<span class="ansi-cyan-fg">(pid=4130)</span> Processing...
-180.4%2020-04-18 03:58:25,962	ERROR function_runner.py:116 -- Runner Thread raised error.
-<span class="ansi-cyan-fg">(pid=4130)</span> Traceback (most recent call last):
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 110, in run
-<span class="ansi-cyan-fg">(pid=4130)</span>     self._entrypoint()
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 162, in entrypoint
-<span class="ansi-cyan-fg">(pid=4130)</span>     return self._trainable_func(config, self._status_reporter)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 288, in _trainable_func
-<span class="ansi-cyan-fg">(pid=4130)</span>     output = train_func(config)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "&lt;ipython-input-5-3680854f46a2&gt;", line 3, in train_evaluate
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/build/facebook/Ax/ax/utils/tutorials/cnn_utils.py", line 76, in load_mnist
-<span class="ansi-cyan-fg">(pid=4130)</span>     root=data_path, train=True, download=True, transform=transform
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 70, in __init__
-<span class="ansi-cyan-fg">(pid=4130)</span>     self.download()
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 143, in download
-<span class="ansi-cyan-fg">(pid=4130)</span>     read_image_file(os.path.join(self.raw_folder, 'train-images-idx3-ubyte')),
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 470, in read_image_file
-<span class="ansi-cyan-fg">(pid=4130)</span>     x = read_sn3_pascalvincent_tensor(f, strict=False)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 457, in read_sn3_pascalvincent_tensor
-<span class="ansi-cyan-fg">(pid=4130)</span>     return torch.from_numpy(parsed.astype(m[2], copy=False)).view(*s)
-<span class="ansi-cyan-fg">(pid=4130)</span> RuntimeError: shape '[60000, 28, 28]' is invalid for input of size 8613872
-<span class="ansi-cyan-fg">(pid=4131)</span> Extracting /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
+2.1%
+72.7%
+23.2%
+23.3%
+74.3%
+23.6%
+75.6%
+24.1%
+75.9%
+24.5%
+76.1%
 100.1%
-<span class="ansi-cyan-fg">(pid=4130)</span> Exception in thread Thread-1:
-<span class="ansi-cyan-fg">(pid=4130)</span> Traceback (most recent call last):
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/opt/python/3.7.1/lib/python3.7/threading.py", line 917, in _bootstrap_inner
-<span class="ansi-cyan-fg">(pid=4130)</span>     self.run()
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 129, in run
-<span class="ansi-cyan-fg">(pid=4130)</span>     raise e
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 110, in run
-<span class="ansi-cyan-fg">(pid=4130)</span>     self._entrypoint()
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 162, in entrypoint
-<span class="ansi-cyan-fg">(pid=4130)</span>     return self._trainable_func(config, self._status_reporter)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 288, in _trainable_func
-<span class="ansi-cyan-fg">(pid=4130)</span>     output = train_func(config)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "&lt;ipython-input-5-3680854f46a2&gt;", line 3, in train_evaluate
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/build/facebook/Ax/ax/utils/tutorials/cnn_utils.py", line 76, in load_mnist
-<span class="ansi-cyan-fg">(pid=4130)</span>     root=data_path, train=True, download=True, transform=transform
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 70, in __init__
-<span class="ansi-cyan-fg">(pid=4130)</span>     self.download()
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 143, in download
-<span class="ansi-cyan-fg">(pid=4130)</span>     read_image_file(os.path.join(self.raw_folder, 'train-images-idx3-ubyte')),
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 470, in read_image_file
-<span class="ansi-cyan-fg">(pid=4130)</span>     x = read_sn3_pascalvincent_tensor(f, strict=False)
-<span class="ansi-cyan-fg">(pid=4130)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 457, in read_sn3_pascalvincent_tensor
-<span class="ansi-cyan-fg">(pid=4130)</span>     return torch.from_numpy(parsed.astype(m[2], copy=False)).view(*s)
-<span class="ansi-cyan-fg">(pid=4130)</span> RuntimeError: shape '[60000, 28, 28]' is invalid for input of size 8613872
-<span class="ansi-cyan-fg">(pid=4130)</span> 
+64.4%
+<span class="ansi-cyan-fg">(pid=4076)</span> Extracting /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
+100.1%
+<span class="ansi-cyan-fg">(pid=4077)</span> Extracting /home/travis/.data/MNIST/raw/train-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4076)</span> Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz
+<span class="ansi-cyan-fg">(pid=4077)</span> Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz
+28.4%
+113.5%
+<span class="ansi-cyan-fg">(pid=4076)</span> Extracting /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4076)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz
+113.5%
+<span class="ansi-cyan-fg">(pid=4077)</span> Extracting /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4077)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz
+0.5%
+0.5%
+17.9%
+9.4%
+19.9%
+9.9%
+10.4%
+21.4%
+10.9%
+22.9%
+11.9%
+12.4%
+24.3%
+13.4%
+25.8%
+14.4%
+27.3%
+14.9%
+28.8%
+15.9%
+29.8%
+16.9%
+32.8%
+17.4%
+<span class="ansi-cyan-fg">(pid=4076)</span> Extracting /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
+100.4%
+100.4%
+<span class="ansi-cyan-fg">(pid=4077)</span> Extracting /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4076)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+<span class="ansi-cyan-fg">(pid=4076)</span> Extracting /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4076)</span> Processing...
+180.4%
+<span class="ansi-cyan-fg">(pid=4077)</span> Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:58:26] ax.service.ax_client: Generated new trial 10 with parameters {'lr': 0.0, 'momentum': 0.7}.
+<pre>[INFO 04-19 03:59:09] ax.service.ax_client: Generated new trial 10 with parameters {'lr': 0.0, 'momentum': 0.18}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4131)</span> Using downloaded and verified file: /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz
-<span class="ansi-cyan-fg">(pid=4131)</span> Extracting /home/travis/.data/MNIST/raw/train-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
-<span class="ansi-cyan-fg">(pid=4131)</span> Using downloaded and verified file: /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz
-<span class="ansi-cyan-fg">(pid=4131)</span> Extracting /home/travis/.data/MNIST/raw/t10k-images-idx3-ubyte.gz to /home/travis/.data/MNIST/raw
-<span class="ansi-cyan-fg">(pid=4131)</span> Using downloaded and verified file: /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz
-<span class="ansi-cyan-fg">(pid=4131)</span> Extracting /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
-<span class="ansi-cyan-fg">(pid=4131)</span> Processing...
-<span class="ansi-cyan-fg">(pid=4131)</span> Done!
-<span class="ansi-cyan-fg">(pid=4199)</span> 2020-04-18 03:58:29,798	INFO trainable.py:217 -- Getting current IP.
+<pre>180.4%
+<span class="ansi-cyan-fg">(pid=4077)</span> Extracting /home/travis/.data/MNIST/raw/t10k-labels-idx1-ubyte.gz to /home/travis/.data/MNIST/raw
+<span class="ansi-cyan-fg">(pid=4077)</span> Processing...
+<span class="ansi-cyan-fg">(pid=4076)</span> Done!
+<span class="ansi-cyan-fg">(pid=4076)</span> 2020-04-19 03:59:09,324	ERROR function_runner.py:116 -- Runner Thread raised error.
+<span class="ansi-cyan-fg">(pid=4076)</span> Traceback (most recent call last):
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 110, in run
+<span class="ansi-cyan-fg">(pid=4076)</span>     self._entrypoint()
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 162, in entrypoint
+<span class="ansi-cyan-fg">(pid=4076)</span>     return self._trainable_func(config, self._status_reporter)
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 288, in _trainable_func
+<span class="ansi-cyan-fg">(pid=4076)</span>     output = train_func(config)
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "&lt;ipython-input-5-3680854f46a2&gt;", line 3, in train_evaluate
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/build/facebook/Ax/ax/utils/tutorials/cnn_utils.py", line 76, in load_mnist
+<span class="ansi-cyan-fg">(pid=4076)</span>     root=data_path, train=True, download=True, transform=transform
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 80, in __init__
+<span class="ansi-cyan-fg">(pid=4076)</span>     self.data, self.targets = torch.load(os.path.join(self.processed_folder, data_file))
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torch/serialization.py", line 526, in load
+<span class="ansi-cyan-fg">(pid=4076)</span>     if _is_zipfile(opened_file):
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torch/serialization.py", line 76, in _is_zipfile
+<span class="ansi-cyan-fg">(pid=4076)</span>     if ord(magic_byte) != ord(read_byte):
+<span class="ansi-cyan-fg">(pid=4076)</span> TypeError: ord() expected a character, but string of length 0 found
+<span class="ansi-cyan-fg">(pid=4076)</span> Exception in thread Thread-1:
+<span class="ansi-cyan-fg">(pid=4076)</span> Traceback (most recent call last):
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/opt/python/3.7.1/lib/python3.7/threading.py", line 917, in _bootstrap_inner
+<span class="ansi-cyan-fg">(pid=4076)</span>     self.run()
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 129, in run
+<span class="ansi-cyan-fg">(pid=4076)</span>     raise e
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 110, in run
+<span class="ansi-cyan-fg">(pid=4076)</span>     self._entrypoint()
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 162, in entrypoint
+<span class="ansi-cyan-fg">(pid=4076)</span>     return self._trainable_func(config, self._status_reporter)
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/ray/tune/function_runner.py", line 288, in _trainable_func
+<span class="ansi-cyan-fg">(pid=4076)</span>     output = train_func(config)
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "&lt;ipython-input-5-3680854f46a2&gt;", line 3, in train_evaluate
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/build/facebook/Ax/ax/utils/tutorials/cnn_utils.py", line 76, in load_mnist
+<span class="ansi-cyan-fg">(pid=4076)</span>     root=data_path, train=True, download=True, transform=transform
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torchvision/datasets/mnist.py", line 80, in __init__
+<span class="ansi-cyan-fg">(pid=4076)</span>     self.data, self.targets = torch.load(os.path.join(self.processed_folder, data_file))
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torch/serialization.py", line 526, in load
+<span class="ansi-cyan-fg">(pid=4076)</span>     if _is_zipfile(opened_file):
+<span class="ansi-cyan-fg">(pid=4076)</span>   File "/home/travis/virtualenv/python3.7.1/lib/python3.7/site-packages/torch/serialization.py", line 76, in _is_zipfile
+<span class="ansi-cyan-fg">(pid=4076)</span>     if ord(magic_byte) != ord(read_byte):
+<span class="ansi-cyan-fg">(pid=4076)</span> TypeError: ord() expected a character, but string of length 0 found
+<span class="ansi-cyan-fg">(pid=4076)</span> 
+<span class="ansi-cyan-fg">(pid=4077)</span> Done!
+<span class="ansi-cyan-fg">(pid=4111)</span> 2020-04-19 03:59:12,422	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:58:43] ax.service.ax_client: Completed trial 0 with data: {'mean_accuracy': (0.9, 0.0)}.
-[INFO 04-18 03:58:43] ax.service.ax_client: Generated new trial 11 with parameters {'lr': 0.03, 'momentum': 0.03}.
-[INFO 04-18 03:58:46] ax.service.ax_client: Completed trial 2 with data: {'mean_accuracy': (0.89, 0.0)}.
-[INFO 04-18 03:58:46] ax.service.ax_client: Generated new trial 12 with parameters {'lr': 0.0, 'momentum': 0.1}.
+<pre>[INFO 04-19 03:59:25] ax.service.ax_client: Completed trial 1 with data: {'mean_accuracy': (0.11, 0.0)}.
+[INFO 04-19 03:59:25] ax.service.ax_client: Generated new trial 11 with parameters {'lr': 0.0, 'momentum': 0.61}.
+[INFO 04-19 03:59:29] ax.service.ax_client: Completed trial 2 with data: {'mean_accuracy': (0.93, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4218)</span> 2020-04-18 03:58:47,240	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4230)</span> 2020-04-18 03:58:50,467	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4156)</span> 2020-04-19 03:59:29,227	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:03] ax.service.ax_client: Completed trial 3 with data: {'mean_accuracy': (0.1, 0.0)}.
-[INFO 04-18 03:59:05] ax.service.ax_client: Generated new trial 13 with parameters {'lr': 0.0, 'momentum': 0.63}.
-[INFO 04-18 03:59:07] ax.service.ax_client: Completed trial 4 with data: {'mean_accuracy': (0.1, 0.0)}.
+<pre>[INFO 04-19 03:59:29] ax.service.ax_client: Generated new trial 12 with parameters {'lr': 0.0, 'momentum': 0.11}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4231)</span> 2020-04-18 03:59:08,799	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4171)</span> 2020-04-19 03:59:33,040	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:09] ax.service.ax_client: Generated new trial 14 with parameters {'lr': 0.0, 'momentum': 0.57}.
+<pre>[INFO 04-19 03:59:45] ax.service.ax_client: Completed trial 3 with data: {'mean_accuracy': (0.1, 0.0)}.
+[INFO 04-19 03:59:47] ax.service.ax_client: Generated new trial 13 with parameters {'lr': 0.4, 'momentum': 0.0}.
+[INFO 04-19 03:59:49] ax.service.ax_client: Completed trial 4 with data: {'mean_accuracy': (0.25, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4266)</span> 2020-04-18 03:59:12,666	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4188)</span> 2020-04-19 03:59:51,213	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:25] ax.service.ax_client: Completed trial 5 with data: {'mean_accuracy': (0.97, 0.0)}.
-[INFO 04-18 03:59:27] ax.service.ax_client: Generated new trial 15 with parameters {'lr': 0.0, 'momentum': 1.0}.
-[INFO 04-18 03:59:29] ax.service.ax_client: Completed trial 6 with data: {'mean_accuracy': (0.95, 0.0)}.
+<pre>[INFO 04-19 03:59:52] ax.service.ax_client: Generated new trial 14 with parameters {'lr': 0.0, 'momentum': 0.61}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4281)</span> 2020-04-18 03:59:30,941	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4203)</span> 2020-04-19 03:59:55,374	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:31] ax.service.ax_client: Generated new trial 16 with parameters {'lr': 0.0, 'momentum': 0.0}.
+<pre>[INFO 04-19 04:00:07] ax.service.ax_client: Completed trial 5 with data: {'mean_accuracy': (0.95, 0.0)}.
+[INFO 04-19 04:00:12] ax.service.ax_client: Generated new trial 15 with parameters {'lr': 0.0, 'momentum': 0.35}.
+[INFO 04-19 04:00:12] ax.service.ax_client: Completed trial 6 with data: {'mean_accuracy': (0.48, 0.0)}.
+2020-04-19 04:00:13,540	WARNING worker.py:1072 -- The actor or task with ID ffffffffffffffff24bd907e0100 is pending and cannot currently be scheduled. It requires {CPU: 1.000000} for execution and {CPU: 1.000000} for placement, but this node only has remaining {node:10.30.0.53: 1.000000}, {CPU: 2.000000}, {memory: 4.345703 GiB}, {object_store_memory: 1.464844 GiB}. In total there are 0 pending tasks and 1 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale.
+[INFO 04-19 04:00:15] ax.service.ax_client: Generated new trial 16 with parameters {'lr': 0.0, 'momentum': 0.0}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4295)</span> 2020-04-18 03:59:35,019	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4219)</span> 2020-04-19 04:00:16,187	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4220)</span> 2020-04-19 04:00:17,973	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:47] ax.service.ax_client: Completed trial 7 with data: {'mean_accuracy': (0.09, 0.0)}.
-[INFO 04-18 03:59:50] ax.service.ax_client: Generated new trial 17 with parameters {'lr': 0.0, 'momentum': 0.0}.
-2020-04-18 03:59:50,558	WARNING worker.py:1072 -- The actor or task with ID ffffffffffffffff307968960100 is pending and cannot currently be scheduled. It requires {CPU: 1.000000} for execution and {CPU: 1.000000} for placement, but this node only has remaining {node:10.30.0.208: 1.000000}, {CPU: 1.000000}, {memory: 4.345703 GiB}, {object_store_memory: 1.464844 GiB}. In total there are 0 pending tasks and 1 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale.
-[INFO 04-18 03:59:52] ax.service.ax_client: Completed trial 8 with data: {'mean_accuracy': (0.34, 0.0)}.
+<pre>[INFO 04-19 04:00:32] ax.service.ax_client: Completed trial 7 with data: {'mean_accuracy': (0.96, 0.0)}.
+[INFO 04-19 04:00:36] ax.service.ax_client: Generated new trial 17 with parameters {'lr': 0.0, 'momentum': 1.0}.
+[INFO 04-19 04:00:36] ax.service.ax_client: Completed trial 8 with data: {'mean_accuracy': (0.91, 0.0)}.
+[INFO 04-19 04:00:40] ax.service.ax_client: Generated new trial 18 with parameters {'lr': 0.0, 'momentum': 0.85}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4316)</span> 2020-04-18 03:59:53,995	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4255)</span> 2020-04-19 04:00:40,017	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4256)</span> 2020-04-19 04:00:42,805	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 03:59:55] ax.service.ax_client: Generated new trial 18 with parameters {'lr': 0.0, 'momentum': 0.61}.
+<pre>[INFO 04-19 04:00:56] ax.service.ax_client: Completed trial 9 with data: {'mean_accuracy': (0.88, 0.0)}.
+[INFO 04-19 04:00:59] ax.service.ax_client: Generated new trial 19 with parameters {'lr': 0.0, 'momentum': 0.0}.
+[INFO 04-19 04:00:59] ax.service.ax_client: Completed trial 10 with data: {'mean_accuracy': (0.97, 0.0)}.
+[INFO 04-19 04:01:03] ax.service.ax_client: Generated new trial 20 with parameters {'lr': 0.0, 'momentum': 0.0}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4331)</span> 2020-04-18 03:59:59,165	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4285)</span> 2020-04-19 04:01:03,357	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4286)</span> 2020-04-19 04:01:06,248	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:00:10] ax.service.ax_client: Completed trial 9 with data: {'mean_accuracy': (0.94, 0.0)}.
-[INFO 04-18 04:00:14] ax.service.ax_client: Generated new trial 19 with parameters {'lr': 0.0, 'momentum': 0.23}.
-[INFO 04-18 04:00:16] ax.service.ax_client: Completed trial 10 with data: {'mean_accuracy': (0.91, 0.0)}.
+<pre>[INFO 04-19 04:01:19] ax.service.ax_client: Completed trial 11 with data: {'mean_accuracy': (0.96, 0.0)}.
+[INFO 04-19 04:01:23] ax.service.ax_client: Generated new trial 21 with parameters {'lr': 0.0, 'momentum': 0.2}.
+[INFO 04-19 04:01:23] ax.service.ax_client: Completed trial 12 with data: {'mean_accuracy': (0.83, 0.0)}.
+2020-04-19 04:01:23,676	WARNING worker.py:1072 -- The actor or task with ID ffffffffffffffffa09279f70100 is pending and cannot currently be scheduled. It requires {CPU: 1.000000} for execution and {CPU: 1.000000} for placement, but this node only has remaining {node:10.30.0.53: 1.000000}, {CPU: 2.000000}, {memory: 4.345703 GiB}, {object_store_memory: 1.464844 GiB}. In total there are 0 pending tasks and 1 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4347)</span> 2020-04-18 04:00:18,300	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4315)</span> 2020-04-19 04:01:26,958	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:00:20] ax.service.ax_client: Generated new trial 20 with parameters {'lr': 0.0, 'momentum': 1.0}.
+<pre>[INFO 04-19 04:01:27] ax.service.ax_client: Generated new trial 22 with parameters {'lr': 0.01, 'momentum': 0.0}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4362)</span> 2020-04-18 04:00:24,274	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4316)</span> 2020-04-19 04:01:30,500	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:00:35] ax.service.ax_client: Completed trial 11 with data: {'mean_accuracy': (0.11, 0.0)}.
-[INFO 04-18 04:00:38] ax.service.ax_client: Generated new trial 21 with parameters {'lr': 0.0, 'momentum': 0.38}.
-[INFO 04-18 04:00:41] ax.service.ax_client: Completed trial 12 with data: {'mean_accuracy': (0.59, 0.0)}.
+<pre>[INFO 04-19 04:01:43] ax.service.ax_client: Completed trial 13 with data: {'mean_accuracy': (0.11, 0.0)}.
+[INFO 04-19 04:01:44] ModelBridge: Leaving out out-of-design observations for arms: 13_0
+[INFO 04-19 04:01:46] ax.service.ax_client: Generated new trial 23 with parameters {'lr': 0.4, 'momentum': 0.0}.
+[INFO 04-19 04:01:47] ax.service.ax_client: Completed trial 14 with data: {'mean_accuracy': (0.9, 0.0)}.
+[INFO 04-19 04:01:47] ModelBridge: Leaving out out-of-design observations for arms: 13_0
+[INFO 04-19 04:01:50] ax.service.ax_client: Generated new trial 24 with parameters {'lr': 0.0, 'momentum': 0.11}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4378)</span> 2020-04-18 04:00:42,294	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4352)</span> 2020-04-19 04:01:49,972	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4365)</span> 2020-04-19 04:01:53,465	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:00:45] ax.service.ax_client: Generated new trial 22 with parameters {'lr': 0.0, 'momentum': 1.0}.
+<pre>[INFO 04-19 04:02:06] ax.service.ax_client: Completed trial 15 with data: {'mean_accuracy': (0.92, 0.0)}.
+[INFO 04-19 04:02:07] ModelBridge: Leaving out out-of-design observations for arms: 13_0
+[INFO 04-19 04:02:11] ax.service.ax_client: Generated new trial 25 with parameters {'lr': 0.05, 'momentum': 0.0}.
+[INFO 04-19 04:02:11] ax.service.ax_client: Completed trial 16 with data: {'mean_accuracy': (0.94, 0.0)}.
+[INFO 04-19 04:02:11] ModelBridge: Leaving out out-of-design observations for arms: 13_0
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4393)</span> 2020-04-18 04:00:48,775	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4383)</span> 2020-04-19 04:02:15,395	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:00:59] ax.service.ax_client: Completed trial 13 with data: {'mean_accuracy': (0.27, 0.0)}.
-[INFO 04-18 04:01:04] ax.service.ax_client: Generated new trial 23 with parameters {'lr': 0.0, 'momentum': 0.61}.
-[INFO 04-18 04:01:06] ax.service.ax_client: Completed trial 14 with data: {'mean_accuracy': (0.77, 0.0)}.
+<pre>[INFO 04-19 04:02:15] ax.service.ax_client: Generated new trial 26 with parameters {'lr': 0.01, 'momentum': 0.0}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4413)</span> 2020-04-18 04:01:08,256	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4384)</span> 2020-04-19 04:02:18,328	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:01:10] ax.service.ax_client: Generated new trial 24 with parameters {'lr': 0.0, 'momentum': 0.28}.
-2020-04-18 04:01:10,708	WARNING worker.py:1072 -- The actor or task with ID ffffffffffffffffe967c3680100 is pending and cannot currently be scheduled. It requires {CPU: 1.000000} for execution and {CPU: 1.000000} for placement, but this node only has remaining {node:10.30.0.208: 1.000000}, {CPU: 1.000000}, {memory: 4.345703 GiB}, {object_store_memory: 1.464844 GiB}. In total there are 0 pending tasks and 1 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale.
+<pre>[INFO 04-19 04:02:32] ax.service.ax_client: Completed trial 17 with data: {'mean_accuracy': (0.9, 0.0)}.
+[INFO 04-19 04:02:32] ModelBridge: Leaving out out-of-design observations for arms: 13_0
+[INFO 04-19 04:02:35] ax.service.ax_client: Generated new trial 27 with parameters {'lr': 0.0, 'momentum': 0.33}.
+[INFO 04-19 04:02:35] ax.service.ax_client: Completed trial 18 with data: {'mean_accuracy': (0.93, 0.0)}.
+[INFO 04-19 04:02:35] ModelBridge: Leaving out out-of-design observations for arms: 13_0
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4428)</span> 2020-04-18 04:01:13,553	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4435)</span> 2020-04-19 04:02:39,321	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:01:24] ax.service.ax_client: Completed trial 15 with data: {'mean_accuracy': (0.79, 0.0)}.
-[INFO 04-18 04:01:29] ax.service.ax_client: Generated new trial 25 with parameters {'lr': 0.0, 'momentum': 1.0}.
-[INFO 04-18 04:01:30] ax.service.ax_client: Completed trial 16 with data: {'mean_accuracy': (0.97, 0.0)}.
+<pre>[INFO 04-19 04:02:40] ax.service.ax_client: Generated new trial 28 with parameters {'lr': 0.0, 'momentum': 0.06}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4444)</span> 2020-04-18 04:01:33,587	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4434)</span> 2020-04-19 04:02:43,148	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:01:34] ax.service.ax_client: Generated new trial 26 with parameters {'lr': 0.0, 'momentum': 0.15}.
+<pre>[INFO 04-19 04:02:56] ax.service.ax_client: Completed trial 19 with data: {'mean_accuracy': (0.9, 0.0)}.
+[INFO 04-19 04:02:56] ModelBridge: Leaving out out-of-design observations for arms: 13_0
+[INFO 04-19 04:02:58] ax.service.ax_client: Generated new trial 29 with parameters {'lr': 0.0, 'momentum': 0.0}.
+[INFO 04-19 04:03:00] ax.service.ax_client: Completed trial 20 with data: {'mean_accuracy': (0.96, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4460)</span> 2020-04-18 04:01:38,437	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4465)</span> 2020-04-19 04:03:01,693	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4477)</span> 2020-04-19 04:03:03,509	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:01:50] ax.service.ax_client: Completed trial 17 with data: {'mean_accuracy': (0.1, 0.0)}.
-[INFO 04-18 04:01:55] ax.service.ax_client: Generated new trial 27 with parameters {'lr': 0.0, 'momentum': 1.0}.
-[INFO 04-18 04:01:55] ax.service.ax_client: Completed trial 18 with data: {'mean_accuracy': (0.96, 0.0)}.
+<pre>[INFO 04-19 04:03:18] ax.service.ax_client: Completed trial 21 with data: {'mean_accuracy': (0.95, 0.0)}.
+[INFO 04-19 04:03:19] ax.service.ax_client: Completed trial 22 with data: {'mean_accuracy': (0.11, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4475)</span> 2020-04-18 04:01:59,507	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4500)</span> 2020-04-19 04:03:22,052	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4510)</span> 2020-04-19 04:03:22,910	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:02:01] ax.service.ax_client: Generated new trial 28 with parameters {'lr': 0.0, 'momentum': 0.0}.
+<pre>[INFO 04-19 04:03:38] ax.service.ax_client: Completed trial 23 with data: {'mean_accuracy': (0.12, 0.0)}.
+[INFO 04-19 04:03:39] ax.service.ax_client: Completed trial 24 with data: {'mean_accuracy': (0.93, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4481)</span> 2020-04-18 04:02:04,361	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4531)</span> 2020-04-19 04:03:42,089	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4540)</span> 2020-04-19 04:03:42,775	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:02:16] ax.service.ax_client: Completed trial 19 with data: {'mean_accuracy': (0.95, 0.0)}.
-[INFO 04-18 04:02:20] ax.service.ax_client: Generated new trial 29 with parameters {'lr': 0.0, 'momentum': 0.0}.
-2020-04-18 04:02:20,874	WARNING worker.py:1072 -- The actor or task with ID fffffffffffffffff82735b70100 is pending and cannot currently be scheduled. It requires {CPU: 1.000000} for execution and {CPU: 1.000000} for placement, but this node only has remaining {node:10.30.0.208: 1.000000}, {CPU: 1.000000}, {memory: 4.345703 GiB}, {object_store_memory: 1.464844 GiB}. In total there are 0 pending tasks and 1 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale.
-[INFO 04-18 04:02:21] ax.service.ax_client: Completed trial 20 with data: {'mean_accuracy': (0.9, 0.0)}.
+<pre>[INFO 04-19 04:03:59] ax.service.ax_client: Completed trial 25 with data: {'mean_accuracy': (0.11, 0.0)}.
+[INFO 04-19 04:03:59] ax.service.ax_client: Completed trial 26 with data: {'mean_accuracy': (0.1, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4531)</span> 2020-04-18 04:02:23,841	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4541)</span> 2020-04-18 04:02:25,099	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4562)</span> 2020-04-19 04:04:02,569	INFO trainable.py:217 -- Getting current IP.
+<span class="ansi-cyan-fg">(pid=4561)</span> 2020-04-19 04:04:02,683	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:02:41] ax.service.ax_client: Completed trial 21 with data: {'mean_accuracy': (0.96, 0.0)}.
-[INFO 04-18 04:02:41] ax.service.ax_client: Completed trial 22 with data: {'mean_accuracy': (0.12, 0.0)}.
+<pre>[INFO 04-19 04:04:19] ax.service.ax_client: Completed trial 28 with data: {'mean_accuracy': (0.96, 0.0)}.
+[INFO 04-19 04:04:20] ax.service.ax_client: Completed trial 27 with data: {'mean_accuracy': (0.97, 0.0)}.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4562)</span> 2020-04-18 04:02:44,395	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4571)</span> 2020-04-18 04:02:45,120	INFO trainable.py:217 -- Getting current IP.
+<pre><span class="ansi-cyan-fg">(pid=4570)</span> 2020-04-19 04:04:21,503	INFO trainable.py:217 -- Getting current IP.
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:03:01] ax.service.ax_client: Completed trial 23 with data: {'mean_accuracy': (0.97, 0.0)}.
-[INFO 04-18 04:03:02] ax.service.ax_client: Completed trial 24 with data: {'mean_accuracy': (0.96, 0.0)}.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4593)</span> 2020-04-18 04:03:05,226	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4594)</span> 2020-04-18 04:03:05,837	INFO trainable.py:217 -- Getting current IP.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:03:22] ax.service.ax_client: Completed trial 25 with data: {'mean_accuracy': (0.84, 0.0)}.
-[INFO 04-18 04:03:23] ax.service.ax_client: Completed trial 26 with data: {'mean_accuracy': (0.96, 0.0)}.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4601)</span> 2020-04-18 04:03:25,849	INFO trainable.py:217 -- Getting current IP.
-<span class="ansi-cyan-fg">(pid=4638)</span> 2020-04-18 04:03:26,736	INFO trainable.py:217 -- Getting current IP.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:03:42] ax.service.ax_client: Completed trial 27 with data: {'mean_accuracy': (0.49, 0.0)}.
-[INFO 04-18 04:03:44] ax.service.ax_client: Completed trial 28 with data: {'mean_accuracy': (0.95, 0.0)}.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-cyan-fg">(pid=4659)</span> 2020-04-18 04:03:45,683	INFO trainable.py:217 -- Getting current IP.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[INFO 04-18 04:03:56] ax.service.ax_client: Completed trial 29 with data: {'mean_accuracy': (0.89, 0.0)}.
+<pre>[INFO 04-19 04:04:31] ax.service.ax_client: Completed trial 29 with data: {'mean_accuracy': (0.96, 0.0)}.
 </pre>
 </div>
 </div>
@@ -1057,7 +1018,7 @@ function slice_config_to_trace(
 <span class="ansi-green-intense-fg ansi-bold">    343</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">    344</span>             logger<span class="ansi-blue-fg">.</span>error<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">"Trials did not complete: %s"</span><span class="ansi-blue-fg">,</span> incomplete_trials<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">TuneError</span>: ('Trials did not complete', [train_evaluate_d7a78ef3])</pre>
+<span class="ansi-red-fg">TuneError</span>: ('Trials did not complete', [train_evaluate_1bb4438c])</pre>
 </div>
 </div>
 </div>
