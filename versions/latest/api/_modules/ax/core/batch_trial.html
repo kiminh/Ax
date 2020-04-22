@@ -85,6 +85,32 @@ src="/js/documentation_options.js">
 
 
 <div class="viewcode-block" id="BatchTrial"><a class="viewcode-back" href="../../../core.html#ax.BatchTrial">[docs]</a><span class="k">class</span> <span class="nc">BatchTrial</span><span class="p">(</span><span class="n">BaseTrial</span><span class="p">):</span>
+    <span class="sd">"""Batched trial that has multiple attached arms, meant to be</span>
+<span class="sd">    *deployed and evaluated together*, and possibly arm weights, which are</span>
+<span class="sd">    a measure of how much of the total resources allocated to evaluating</span>
+<span class="sd">    a batch should go towards evaluating the specific arm. For instance,</span>
+<span class="sd">    for field experiments the weights could describe the fraction of the</span>
+<span class="sd">    total experiment population assigned to the different treatment arms.</span>
+<span class="sd">    Interpretation of the weights is defined in Runner.</span>
+
+<span class="sd">    NOTE: A `BatchTrial` is not just a trial with many arms; it is a trial,</span>
+<span class="sd">    for which it is important that the arms are evaluated simultaneously, e.g.</span>
+<span class="sd">    in an A/B test where the evaluation results are subject to nonstationarity.</span>
+<span class="sd">    For cases where multiple arms are evaluated separately and independently of</span>
+<span class="sd">    each other, use multiple `Trial` objects with a single arm each.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        experiment: Experiment, to which this trial is attached</span>
+<span class="sd">        generator_run: GeneratorRun, associated with this trial. This can a</span>
+<span class="sd">            also be set later through `add_arm` or `add_generator_run`, but a</span>
+<span class="sd">            trial's associated generator run is immutable once set.</span>
+<span class="sd">        trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
+<span class="sd">        optimize_for_power: Whether to optimize the weights of arms in this</span>
+<span class="sd">            trial such that the experiment's power to detect effects of</span>
+<span class="sd">            certain size is as high as possible. Refer to documentation of</span>
+<span class="sd">            `BatchTrial.set_status_quo_and_optimize_power` for more detail.</span>
+<span class="sd">    """</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">experiment</span><span class="p">:</span> <span class="s2">"core.experiment.Experiment"</span><span class="p">,</span>
@@ -288,7 +314,7 @@ src="/js/documentation_options.js">
     <span class="k">def</span> <span class="nf">set_status_quo_and_optimize_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status_quo</span><span class="p">:</span> <span class="n">Arm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"BatchTrial"</span><span class="p">:</span>
         <span class="sd">"""Adds a status quo arm to the batch and optimizes for power.</span>
 
-<span class="sd">        Note: this optimization based on the arms that are currently attached</span>
+<span class="sd">        NOTE: this optimization based on the arms that are currently attached</span>
 <span class="sd">        to the batch. If you add more arms later, you should re-run this function.</span>
 <span class="sd">        If you want the optimization to happen automatically,</span>
 <span class="sd">        set batch.optimize_for_power = True.</span>

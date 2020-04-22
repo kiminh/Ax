@@ -139,8 +139,12 @@ src="/js/documentation_options.js">
     <span class="sd">"""Base class for representing trials.</span>
 
 <span class="sd">    Trials are containers for arms that are deployed together. There are</span>
-<span class="sd">    two types of trials: regular Trial, which only contains a single arm,</span>
+<span class="sd">    two kinds of trials: regular Trial, which only contains a single arm,</span>
 <span class="sd">    and BatchTrial, which contains an arbitrary number of arms.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        experiment: Experiment, of which this trial is a part</span>
+<span class="sd">        trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -268,6 +272,12 @@ src="/js/documentation_options.js">
         <span class="sd">"""Assigns default experiment runner if trial doesn't already have one."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_runner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runner</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">runner_for_trial</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="BaseTrial.update_run_metadata"><a class="viewcode-back" href="../../../core.html#ax.core.base_trial.BaseTrial.update_run_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">update_run_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">"""Updates the run metadata dict stored on this trial and returns the</span>
+<span class="sd">        updated dict."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_metadata</span></div>
 
 <div class="viewcode-block" id="BaseTrial.run"><a class="viewcode-back" href="../../../core.html#ax.core.base_trial.BaseTrial.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"BaseTrial"</span><span class="p">:</span>
         <span class="sd">"""Deploys the trial according to the behavior on the runner.</span>

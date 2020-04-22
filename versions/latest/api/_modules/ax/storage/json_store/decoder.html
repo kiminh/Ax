@@ -64,7 +64,7 @@ src="/js/documentation_options.js">
 <span class="kn">from</span> <span class="nn">ax.storage.json_store.decoders</span> <span class="kn">import</span> <span class="n">batch_trial_from_json</span><span class="p">,</span> <span class="n">trial_from_json</span>
 <span class="kn">from</span> <span class="nn">ax.storage.json_store.registry</span> <span class="kn">import</span> <span class="n">DECODER_REGISTRY</span>
 <span class="kn">from</span> <span class="nn">ax.storage.transform_registry</span> <span class="kn">import</span> <span class="n">REVERSE_TRANSFORM_REGISTRY</span>
-<span class="kn">from</span> <span class="nn">ax.utils.common.typeutils</span> <span class="kn">import</span> <span class="n">torch_type_from_str</span>
+<span class="kn">from</span> <span class="nn">ax.utils.common.typeutils</span> <span class="kn">import</span> <span class="n">not_none</span><span class="p">,</span> <span class="n">torch_type_from_str</span>
 <span class="kn">from</span> <span class="nn">ax.utils.measurement</span> <span class="kn">import</span> <span class="n">synthetic_functions</span>
 
 
@@ -288,11 +288,10 @@ src="/js/documentation_options.js">
     <span class="n">experiment</span><span class="o">.</span><span class="n">_trials</span> <span class="o">=</span> <span class="n">trials_from_json</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">trials_json</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="n">trial</span><span class="o">.</span><span class="n">arms</span><span class="p">:</span>
-            <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">signature</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
+            <span class="n">experiment</span><span class="o">.</span><span class="n">_register_arm</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># pyre-fixme[16]: Optional type has no attribute `signature`.</span>
-        <span class="n">sq_sig</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span><span class="o">.</span><span class="n">signature</span>
-        <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">sq_sig</span><span class="p">]</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span>
+        <span class="n">sq</span> <span class="o">=</span> <span class="n">not_none</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span><span class="p">)</span>
+        <span class="n">experiment</span><span class="o">.</span><span class="n">_register_arm</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_experiment_type</span> <span class="o">=</span> <span class="n">object_from_json</span><span class="p">(</span><span class="n">experiment_type_json</span><span class="p">)</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_data_by_trial</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span><span class="n">data_by_trial_json</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">experiment</span></div>
@@ -307,13 +306,13 @@ src="/js/documentation_options.js">
     <span class="n">experiment</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">object_from_json</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">object_json</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_time_created</span> <span class="o">=</span> <span class="n">object_from_json</span><span class="p">(</span><span class="n">time_created_json</span><span class="p">)</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_trials</span> <span class="o">=</span> <span class="n">trials_from_json</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">trials_json</span><span class="p">)</span>
+    <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_name</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">_trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="n">trial</span><span class="o">.</span><span class="n">arms</span><span class="p">:</span>
-            <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">signature</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
+            <span class="n">experiment</span><span class="o">.</span><span class="n">_register_arm</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># pyre-fixme[16]: Optional type has no attribute `signature`.</span>
-        <span class="n">sq_sig</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span><span class="o">.</span><span class="n">signature</span>
-        <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">sq_sig</span><span class="p">]</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span>
+        <span class="n">sq</span> <span class="o">=</span> <span class="n">not_none</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span><span class="p">)</span>
+        <span class="n">experiment</span><span class="o">.</span><span class="n">_register_arm</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_experiment_type</span> <span class="o">=</span> <span class="n">object_from_json</span><span class="p">(</span><span class="n">experiment_type_json</span><span class="p">)</span>
     <span class="n">experiment</span><span class="o">.</span><span class="n">_data_by_trial</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span><span class="n">data_by_trial_json</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">experiment</span></div>

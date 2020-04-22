@@ -49,12 +49,13 @@ src="/js/documentation_options.js">
     <span class="sd">"""Trial that only has one attached arm and no arm weights.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        experiment: experiment, to which this trial is attached</span>
-<span class="sd">        generator_run: generator_run associated with</span>
-<span class="sd">            this trial. Trial has only one generator run (and thus arm)</span>
+<span class="sd">        experiment: Experiment, to which this trial is attached.</span>
+<span class="sd">        generator_run: GeneratorRun, associated with this trial.</span>
+<span class="sd">            Trial has only one generator run (of just one arm)</span>
 <span class="sd">            attached to it. This can also be set later through `add_arm`</span>
 <span class="sd">            or `add_generator_run`, but a trial's associated genetor run is</span>
 <span class="sd">            immutable once set.</span>
+<span class="sd">        trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
