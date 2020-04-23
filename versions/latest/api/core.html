@@ -549,6 +549,16 @@ transition to running.</p>
 </dl>
 </dd></dl>
 <dl class="method">
+<dt id="ax.core.base_trial.TrialStatus.is_candidate">
+<em class="property">property </em><code class="sig-name descname">is_candidate</code><a class="headerlink" href="#ax.core.base_trial.TrialStatus.is_candidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if this trial is a candidate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="method">
 <dt id="ax.core.base_trial.TrialStatus.is_completed">
 <em class="property">property </em><code class="sig-name descname">is_completed</code><a class="headerlink" href="#ax.core.base_trial.TrialStatus.is_completed" title="Permalink to this definition">¶</a></dt>
 <dd><p>True if this trial is a successfully completed one.</p>
@@ -2183,8 +2193,7 @@ defined on the experiment.</p></li>
 <dd><p>Bases: <a class="reference internal" href="#ax.core.base.Base" title="ax.core.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">ax.core.base.Base</span></code></a></p>
 <p>Represents an observation.</p>
 <p>A set of features (ObservationFeatures) and corresponding measurements
-(ObservationData). Optionally, a arm name associated with the
-features.</p>
+(ObservationData). Optionally, an arm name associated with the features.</p>
 <dl class="attribute">
 <dt id="ax.core.observation.Observation.features">
 <code class="sig-name descname">features</code><a class="headerlink" href="#ax.core.observation.Observation.features" title="Permalink to this definition">¶</a></dt>
@@ -2301,22 +2310,22 @@ any other fields that are not None on the new input features.</p>
 <dt id="ax.core.observation.observations_from_data">
 <code class="sig-prename descclassname">ax.core.observation.</code><code class="sig-name descname">observations_from_data</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/observation.html#observations_from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.core.observation.observations_from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Data to observations.</p>
-<p>Converts a Data object to a list of Observation objects. Pulls
-arm parameters from experiment.  Overrides fidelity parameters in the arm
-with those found in the Data object.</p>
+<p>Converts a Data object to a list of Observation objects. Pulls arm parameters from
+from experiment. Overrides fidelity parameters in the arm with those found in the
+Data object.</p>
 <p>Uses a diagonal covariance matrix across metric_names.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>experiment</strong> (<a class="reference internal" href="#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – Experiment with arm parameters.</p></li>
-<li><p><strong>data</strong> (<a class="reference internal" href="#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – Data of observations</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – Data of observations.</p></li>
 </ul>
 </dd>
-</dl>
-<p>Returns: List of Observation objects.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#ax.core.observation.Observation" title="ax.core.observation.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a>]</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#ax.core.observation.Observation" title="ax.core.observation.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of Observation objects.</p>
 </dd>
 </dl>
 </dd></dl>

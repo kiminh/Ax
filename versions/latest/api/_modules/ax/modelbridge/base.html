@@ -526,7 +526,7 @@ src="/js/documentation_options.js">
 <span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>  <span class="c1"># pragma: no cover</span>
 
-<div class="viewcode-block" id="ModelBridge.update"><a class="viewcode-back" href="../../../modelbridge.html#ax.modelbridge.base.ModelBridge.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">experiment</span><span class="p">:</span> <span class="n">Experiment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="ModelBridge.update"><a class="viewcode-back" href="../../../modelbridge.html#ax.modelbridge.base.ModelBridge.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">experiment</span><span class="p">:</span> <span class="n">Experiment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Update the model bridge and the underlying model with new data. This</span>
 <span class="sd">        method should be used instead of `fit`, in cases where the underlying</span>
 <span class="sd">        model does not need to be re-fit from scratch, but rather updated.</span>
@@ -535,13 +535,14 @@ src="/js/documentation_options.js">
 <span class="sd">        or last update) to be passed in, not all data in the experiment.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data: data from the experiment obtained since the last update</span>
-<span class="sd">            experiment: experiment, in which this data was obtained</span>
+<span class="sd">            new_data: Data from the experiment obtained since the last call to</span>
+<span class="sd">                `update`.</span>
+<span class="sd">            experiment: Experiment, in which this data was obtained.</span>
 <span class="sd">        """</span>
         <span class="n">t_update_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="n">observations</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">observations_from_data</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="n">observations_from_data</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">new_data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">new_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
             <span class="k">else</span> <span class="p">[]</span>
         <span class="p">)</span>
         <span class="n">obs_feats_raw</span><span class="p">,</span> <span class="n">obs_data_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extend_training_data</span><span class="p">(</span>

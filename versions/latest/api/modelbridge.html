@@ -735,7 +735,7 @@ is in-design for the model.</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.base.ModelBridge.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">experiment</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/base.html#ModelBridge.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.base.ModelBridge.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">new_data</em>, <em class="sig-param">experiment</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/base.html#ModelBridge.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.base.ModelBridge.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the model bridge and the underlying model with new data. This
 method should be used instead of <cite>fit</cite>, in cases where the underlying
 model does not need to be re-fit from scratch, but rather updated.</p>
@@ -744,8 +744,9 @@ or last update) to be passed in, not all data in the experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference internal" href="core.html#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – data from the experiment obtained since the last update</p></li>
-<li><p><strong>experiment</strong> (<a class="reference internal" href="core.html#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – experiment, in which this data was obtained</p></li>
+<li><p><strong>new_data</strong> (<a class="reference internal" href="core.html#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – Data from the experiment obtained since the last call to
+<cite>update</cite>.</p></li>
+<li><p><strong>experiment</strong> (<a class="reference internal" href="core.html#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – Experiment, in which this data was obtained.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -968,7 +969,7 @@ Data and optimization configs are not required.</p>
 <dd></dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.random.RandomModelBridge.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">experiment</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/random.html#RandomModelBridge.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.random.RandomModelBridge.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">new_data</em>, <em class="sig-param">experiment</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/random.html#RandomModelBridge.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.random.RandomModelBridge.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the model bridge and the underlying model with new data. This
 method should be used instead of <cite>fit</cite>, in cases where the underlying
 model does not need to be re-fit from scratch, but rather updated.</p>
@@ -977,8 +978,9 @@ or last update) to be passed in, not all data in the experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference internal" href="core.html#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – data from the experiment obtained since the last update</p></li>
-<li><p><strong>experiment</strong> (<a class="reference internal" href="core.html#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – experiment, in which this data was obtained</p></li>
+<li><p><strong>new_data</strong> (<a class="reference internal" href="core.html#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>) – Data from the experiment obtained since the last call to
+<cite>update</cite>.</p></li>
+<li><p><strong>experiment</strong> (<a class="reference internal" href="core.html#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – Experiment, in which this data was obtained.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>

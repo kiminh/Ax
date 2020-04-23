@@ -32,6 +32,8 @@ src="/js/documentation_options.js">
 <span class="c1"># This source code is licensed under the MIT license found in the</span>
 <span class="c1"># LICENSE file in the root directory of this source tree.</span>
 
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
@@ -43,6 +45,18 @@ src="/js/documentation_options.js">
 <span class="kn">from</span> <span class="nn">ax.core.data</span> <span class="kn">import</span> <span class="n">Data</span>
 <span class="kn">from</span> <span class="nn">ax.core.experiment</span> <span class="kn">import</span> <span class="n">Experiment</span>
 <span class="kn">from</span> <span class="nn">ax.core.types</span> <span class="kn">import</span> <span class="n">TParameterization</span>
+
+
+<span class="n">OBS_COLS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"arm_name"</span><span class="p">,</span>
+    <span class="s2">"trial_index"</span><span class="p">,</span>
+    <span class="s2">"start_time"</span><span class="p">,</span>
+    <span class="s2">"end_time"</span><span class="p">,</span>
+    <span class="s2">"random_split"</span><span class="p">,</span>
+    <span class="s2">"fidelities"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">OBS_KWARGS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"trial_index"</span><span class="p">,</span> <span class="s2">"start_time"</span><span class="p">,</span> <span class="s2">"end_time"</span><span class="p">,</span> <span class="s2">"random_split"</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="ObservationFeatures"><a class="viewcode-back" href="../../../core.html#ax.core.observation.ObservationFeatures">[docs]</a><span class="k">class</span> <span class="nc">ObservationFeatures</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
@@ -91,7 +105,7 @@ src="/js/documentation_options.js">
         <span class="c1"># pyre-fixme[11]: Annotation `Timestamp` is not defined as a type.</span>
         <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">random_split</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"ObservationFeatures"</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObservationFeatures</span><span class="p">:</span>
         <span class="sd">"""Convert a Arm to an ObservationFeatures, including additional</span>
 <span class="sd">        data as specified.</span>
 <span class="sd">        """</span>
@@ -103,9 +117,7 @@ src="/js/documentation_options.js">
             <span class="n">random_split</span><span class="o">=</span><span class="n">random_split</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ObservationFeatures.update_features"><a class="viewcode-back" href="../../../core.html#ax.core.observation.ObservationFeatures.update_features">[docs]</a>    <span class="k">def</span> <span class="nf">update_features</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">new_features</span><span class="p">:</span> <span class="s2">"ObservationFeatures"</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"ObservationFeatures"</span><span class="p">:</span>
+<div class="viewcode-block" id="ObservationFeatures.update_features"><a class="viewcode-back" href="../../../core.html#ax.core.observation.ObservationFeatures.update_features">[docs]</a>    <span class="k">def</span> <span class="nf">update_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_features</span><span class="p">:</span> <span class="n">ObservationFeatures</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObservationFeatures</span><span class="p">:</span>
         <span class="sd">"""Updates the existing ObservationFeatures with the fields of the the input.</span>
 
 <span class="sd">        Adds all of the new parameters to the existing parameters and overwrites</span>
@@ -190,8 +202,7 @@ src="/js/documentation_options.js">
     <span class="sd">"""Represents an observation.</span>
 
 <span class="sd">    A set of features (ObservationFeatures) and corresponding measurements</span>
-<span class="sd">    (ObservationData). Optionally, a arm name associated with the</span>
-<span class="sd">    features.</span>
+<span class="sd">    (ObservationData). Optionally, an arm name associated with the features.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        features (ObservationFeatures)</span>
@@ -213,57 +224,50 @@ src="/js/documentation_options.js">
 <div class="viewcode-block" id="observations_from_data"><a class="viewcode-back" href="../../../core.html#ax.core.observation.observations_from_data">[docs]</a><span class="k">def</span> <span class="nf">observations_from_data</span><span class="p">(</span><span class="n">experiment</span><span class="p">:</span> <span class="n">Experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Observation</span><span class="p">]:</span>
     <span class="sd">"""Convert Data to observations.</span>
 
-<span class="sd">    Converts a Data object to a list of Observation objects. Pulls</span>
-<span class="sd">    arm parameters from experiment.  Overrides fidelity parameters in the arm</span>
-<span class="sd">    with those found in the Data object.</span>
+<span class="sd">    Converts a Data object to a list of Observation objects. Pulls arm parameters from</span>
+<span class="sd">    from experiment. Overrides fidelity parameters in the arm with those found in the</span>
+<span class="sd">    Data object.</span>
 
 <span class="sd">    Uses a diagonal covariance matrix across metric_names.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        experiment: Experiment with arm parameters.</span>
-<span class="sd">        data: Data of observations</span>
+<span class="sd">        data: Data of observations.</span>
 
-<span class="sd">    Returns: List of Observation objects.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List of Observation objects.</span>
 <span class="sd">    """</span>
-    <span class="n">feature_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="s2">"arm_name"</span><span class="p">,</span>
-            <span class="s2">"trial_index"</span><span class="p">,</span>
-            <span class="s2">"start_time"</span><span class="p">,</span>
-            <span class="s2">"end_time"</span><span class="p">,</span>
-            <span class="s2">"random_split"</span><span class="p">,</span>
-            <span class="s2">"fidelities"</span><span class="p">,</span>
-        <span class="p">}</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-    <span class="p">)</span>
+    <span class="n">feature_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">OBS_COLS</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
     <span class="n">observations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">arm_name_only</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># there will always be an arm name</span>
     <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">feature_cols</span><span class="p">):</span>
-        <span class="c1"># If g were a single value, zip would transform it into an index,</span>
-        <span class="c1"># and we want the value.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">]</span>  <span class="c1"># pragma: no cover</span>
-        <span class="n">features</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arm_name_only</span><span class="p">:</span>
+            <span class="n">features</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"arm_name"</span><span class="p">:</span> <span class="n">g</span><span class="p">}</span>
+            <span class="n">arm_name</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">features</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+            <span class="n">arm_name</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="s2">"arm_name"</span><span class="p">]</span>
         <span class="n">obs_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">obs_parameters</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">arms_by_name</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s2">"arm_name"</span><span class="p">]]</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">obs_parameters</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">arms_by_name</span><span class="p">[</span><span class="n">arm_name</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">obs_parameters</span><span class="p">:</span>
             <span class="n">obs_kwargs</span><span class="p">[</span><span class="s2">"parameters"</span><span class="p">]</span> <span class="o">=</span> <span class="n">obs_parameters</span>
-        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"trial_index"</span><span class="p">,</span> <span class="s2">"start_time"</span><span class="p">,</span> <span class="s2">"end_time"</span><span class="p">,</span> <span class="s2">"random_split"</span><span class="p">]:</span>
-            <span class="n">obs_kwargs</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s2">"fidelities"</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
-            <span class="n">fidelity_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="s2">"fidelities"</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">fidelity_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">obs_parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">OBS_KWARGS</span><span class="p">:</span>
+                <span class="n">obs_kwargs</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">fidelities</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fidelities"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fidelities</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">obs_parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fidelities</span><span class="p">))</span>
         <span class="n">observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Observation</span><span class="p">(</span>
                 <span class="n">features</span><span class="o">=</span><span class="n">ObservationFeatures</span><span class="p">(</span><span class="o">**</span><span class="n">obs_kwargs</span><span class="p">),</span>
                 <span class="n">data</span><span class="o">=</span><span class="n">ObservationData</span><span class="p">(</span>
-                    <span class="n">metric_names</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"metric_name"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+                    <span class="n">metric_names</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">"metric_name"</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
                     <span class="n">means</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                     <span class="n">covariance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"sem"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span>
                 <span class="p">),</span>
-                <span class="n">arm_name</span><span class="o">=</span><span class="n">features</span><span class="p">[</span><span class="s2">"arm_name"</span><span class="p">],</span>
+                <span class="n">arm_name</span><span class="o">=</span><span class="n">arm_name</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
-
     <span class="k">return</span> <span class="n">observations</span></div>
 
 
