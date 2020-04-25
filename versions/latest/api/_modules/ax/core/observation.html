@@ -255,6 +255,7 @@ src="/js/documentation_options.js">
             <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">OBS_KWARGS</span><span class="p">:</span>
                 <span class="n">obs_kwargs</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="n">fidelities</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fidelities"</span><span class="p">)</span>
+        <span class="c1"># pyre-fixme[25]: Assertion will always fail.</span>
         <span class="k">if</span> <span class="n">fidelities</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">obs_parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fidelities</span><span class="p">))</span>
         <span class="n">observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>

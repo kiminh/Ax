@@ -430,8 +430,10 @@ src="/js/documentation_options.js">
 
     <span class="c1"># Add num_repeated_arms to the new trial.</span>
     <span class="n">arms</span> <span class="o">=</span> <span class="n">prev_arms</span> <span class="o">+</span> <span class="n">next_arms</span>
+    <span class="c1"># pyre-fixme[6]: Expected `List[int]` for 1st param but got `List[float]`.</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">prev_weights</span> <span class="o">+</span> <span class="n">next_weights</span>
     <span class="n">batch</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">new_batch_trial</span><span class="p">()</span>
+    <span class="c1"># pyre-fixme[6]: Expected `Optional[List[float]]` for 2nd param but got `List[int]`.</span>
     <span class="n">batch</span><span class="o">.</span><span class="n">add_arms_and_weights</span><span class="p">(</span><span class="n">arms</span><span class="o">=</span><span class="n">arms</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">batch</span><span class="o">.</span><span class="n">runner</span> <span class="o">=</span> <span class="n">SyntheticRunner</span><span class="p">()</span>
     <span class="n">batch</span><span class="o">.</span><span class="n">set_status_quo_with_weight</span><span class="p">(</span><span class="n">status_quo</span><span class="o">=</span><span class="n">arms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -440,7 +442,7 @@ src="/js/documentation_options.js">
 
 <div class="viewcode-block" id="get_trial"><a class="viewcode-back" href="../../../../utils.html#ax.utils.testing.core_stubs.get_trial">[docs]</a><span class="k">def</span> <span class="nf">get_trial</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Trial</span><span class="p">:</span>
     <span class="n">experiment</span> <span class="o">=</span> <span class="n">get_experiment</span><span class="p">()</span>
-    <span class="n">trial</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">new_trial</span><span class="p">()</span>
+    <span class="n">trial</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">new_trial</span><span class="p">(</span><span class="n">ttl_seconds</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
     <span class="n">arm</span> <span class="o">=</span> <span class="n">get_arms_from_dict</span><span class="p">(</span><span class="n">get_arm_weights1</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">trial</span><span class="o">.</span><span class="n">add_arm</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
     <span class="n">trial</span><span class="o">.</span><span class="n">runner</span> <span class="o">=</span> <span class="n">SyntheticRunner</span><span class="p">()</span>

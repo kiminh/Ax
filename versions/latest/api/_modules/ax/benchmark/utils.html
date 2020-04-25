@@ -48,6 +48,7 @@ src="/js/documentation_options.js">
     <span class="k">if</span> <span class="p">(</span>
         <span class="n">problems</span> <span class="ow">is</span> <span class="kc">None</span>
         <span class="ow">or</span> <span class="n">methods</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="c1"># pyre-fixme[16]: `None` has no attribute `__iter__`.</span>
         <span class="ow">or</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">BenchmarkProblem</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">)</span>
         <span class="ow">or</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">GenerationStrategy</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">)</span>
     <span class="p">):</span>

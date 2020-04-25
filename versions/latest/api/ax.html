@@ -121,7 +121,7 @@ automatically set upon addition to a trial).</p>
 </dd></dl>
 <dl class="class">
 <dt id="ax.BatchTrial">
-<em class="property">class </em><code class="sig-prename descclassname">ax.</code><code class="sig-name descname">BatchTrial</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">optimize_for_power=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/batch_trial.html#BatchTrial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.BatchTrial" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ax.</code><code class="sig-name descname">BatchTrial</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">optimize_for_power=False</em>, <em class="sig-param">ttl_seconds=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/batch_trial.html#BatchTrial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.BatchTrial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batched trial that has multiple attached arms, meant to be
 <em>deployed and evaluated together</em>, and possibly arm weights, which are
 a measure of how much of the total resources allocated to evaluating
@@ -146,6 +146,12 @@ trial’s associated generator run is immutable once set.</p></li>
 trial such that the experiment’s power to detect effects of
 certain size is as high as possible. Refer to documentation of
 <cite>BatchTrial.set_status_quo_and_optimize_power</cite> for more detail.</p></li>
+<li><p><strong>ttl_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If specified, trials will be considered failed after
+this many seconds since the time the trial was ran, unless the
+trial is completed before then. Meant to be used to detect
+‘dead’ trials, for which the evaluation process might have
+crashed etc., and which should be considered failed after
+their ‘time to live’ has passed.</p></li>
 </ul>
 </dd>
 </dl>
@@ -721,7 +727,7 @@ when storage time is known.</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.Experiment.new_batch_trial">
-<code class="sig-name descname">new_batch_trial</code><span class="sig-paren">(</span><em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">optimize_for_power=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/experiment.html#Experiment.new_batch_trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Experiment.new_batch_trial" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">new_batch_trial</code><span class="sig-paren">(</span><em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">optimize_for_power=False</em>, <em class="sig-param">ttl_seconds=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/experiment.html#Experiment.new_batch_trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Experiment.new_batch_trial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new batch trial associated with this experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -734,6 +740,12 @@ trial’s associated generator run is immutable once set.</p></li>
 trial such that the experiment’s power to detect effects of
 certain size is as high as possible. Refer to documentation of
 <cite>BatchTrial.set_status_quo_and_optimize_power</cite> for more detail.</p></li>
+<li><p><strong>ttl_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If specified, trials will be considered failed after
+this many seconds since the time the trial was ran, unless the
+trial is completed before then. Meant to be used to detect
+‘dead’ trials, for which the evaluation process might have
+crashed etc., and which should be considered failed after
+their ‘time to live’ has passed.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -743,7 +755,7 @@ certain size is as high as possible. Refer to documentation of
 </dd></dl>
 <dl class="method">
 <dt id="ax.Experiment.new_trial">
-<code class="sig-name descname">new_trial</code><span class="sig-paren">(</span><em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/experiment.html#Experiment.new_trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Experiment.new_trial" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">new_trial</code><span class="sig-paren">(</span><em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">ttl_seconds=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/experiment.html#Experiment.new_trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Experiment.new_trial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new trial associated with this experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -754,6 +766,12 @@ attached to it. This can also be set later through <cite>add_arm</cite>
 or <cite>add_generator_run</cite>, but a trial’s associated generator run is
 immutable once set.</p></li>
 <li><p><strong>trial_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Type of this trial, if used in MultiTypeExperiment.</p></li>
+<li><p><strong>ttl_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If specified, trials will be considered failed after
+this many seconds since the time the trial was ran, unless the
+trial is completed before then. Meant to be used to detect
+‘dead’ trials, for which the evaluation process might have
+crashed etc., and which should be considered failed after
+their ‘time to live’ has passed.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -895,6 +913,17 @@ with multiple trial types, use the MultiTypeExperiment class.</p>
 </dl>
 </dd></dl>
 <dl class="method">
+<dt id="ax.Experiment.trial_indices_by_status">
+<em class="property">property </em><code class="sig-name descname">trial_indices_by_status</code><a class="headerlink" href="#ax.Experiment.trial_indices_by_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of trials associated with the experiment, grouped by trial
+status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference internal" href="core.html#ax.core.base_trial.TrialStatus" title="ax.core.base_trial.TrialStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrialStatus</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="method">
 <dt id="ax.Experiment.trials">
 <em class="property">property </em><code class="sig-name descname">trials</code><a class="headerlink" href="#ax.Experiment.trials" title="Permalink to this definition">¶</a></dt>
 <dd><p>The trials associated with the experiment.</p>
@@ -907,7 +936,7 @@ with multiple trial types, use the MultiTypeExperiment class.</p>
 <dl class="method">
 <dt id="ax.Experiment.trials_by_status">
 <em class="property">property </em><code class="sig-name descname">trials_by_status</code><a class="headerlink" href="#ax.Experiment.trials_by_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>The trials associated with the experiment grouped by trial status.</p>
+<dd><p>Trials associated with the experiment, grouped by trial status.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference internal" href="core.html#ax.core.base_trial.TrialStatus" title="ax.core.base_trial.TrialStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrialStatus</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="core.html#ax.core.base_trial.BaseTrial" title="ax.core.base_trial.BaseTrial"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTrial</span></code></a>]]</p>
@@ -2013,7 +2042,7 @@ We do this by re-applying the original bound weighting.</p>
 </dd></dl>
 <dl class="class">
 <dt id="ax.Trial">
-<em class="property">class </em><code class="sig-prename descclassname">ax.</code><code class="sig-name descname">Trial</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/trial.html#Trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Trial" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ax.</code><code class="sig-name descname">Trial</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">generator_run=None</em>, <em class="sig-param">trial_type=None</em>, <em class="sig-param">ttl_seconds=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/trial.html#Trial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.Trial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trial that only has one attached arm and no arm weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2025,6 +2054,12 @@ attached to it. This can also be set later through <cite>add_arm</cite>
 or <cite>add_generator_run</cite>, but a trial’s associated genetor run is
 immutable once set.</p></li>
 <li><p><strong>trial_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Type of this trial, if used in MultiTypeExperiment.</p></li>
+<li><p><strong>ttl_seconds</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If specified, trials will be considered failed after
+this many seconds since the time the trial was ran, unless the
+trial is completed before then. Meant to be used to detect
+‘dead’ trials, for which the evaluation process might have
+crashed etc., and which should be considered failed after
+their ‘time to live’ has passed.</p></li>
 </ul>
 </dd>
 </dl>

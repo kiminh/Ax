@@ -286,6 +286,12 @@ src="/js/documentation_options.js">
         <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
         <span class="n">model</span><span class="o">=</span><span class="n">BotorchModel</span><span class="p">(),</span>
         <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">,</span>
+        <span class="c1"># pyre-fixme[6]: Expected `Optional[Dict[str, Dict[str,</span>
+        <span class="c1">#  typing.Union[botorch.acquisition.acquisition.AcquisitionFunction, float,</span>
+        <span class="c1">#  int, str]]]]` for 6th param but got `Optional[Dict[str,</span>
+        <span class="c1">#  typing.Union[Dict[str, Dict[str, Dict[int, Optional[str]]]], Dict[str,</span>
+        <span class="c1">#  typing.Union[botorch.acquisition.acquisition.AcquisitionFunction, float,</span>
+        <span class="c1">#  int, str]]]]]`.</span>
         <span class="n">transform_configs</span><span class="o">=</span><span class="n">transform_configs</span><span class="p">,</span>
         <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">,</span>
         <span class="n">torch_device</span><span class="o">=</span><span class="n">DEFAULT_TORCH_DEVICE</span><span class="p">,</span>

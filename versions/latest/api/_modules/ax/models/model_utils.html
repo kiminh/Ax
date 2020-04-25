@@ -328,6 +328,9 @@ src="/js/documentation_options.js">
     <span class="c1"># Get points observed for all objective and constraint outcomes</span>
     <span class="k">if</span> <span class="n">objective_weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
+    <span class="c1"># pyre-fixme[6]: Expected `Union[np.ndarray, torch.Tensor,</span>
+    <span class="c1">#  typing.Tuple[Union[np.ndarray, torch.Tensor], ...]]` for 1st param but got</span>
+    <span class="c1">#  `Union[None, np.ndarray, torch.Tensor]`.</span>
     <span class="n">objective_weights_np</span> <span class="o">=</span> <span class="n">as_array</span><span class="p">(</span><span class="n">objective_weights</span><span class="p">)</span>
     <span class="n">X_obs</span> <span class="o">=</span> <span class="n">get_observed</span><span class="p">(</span>
         <span class="c1"># pyre-fixme[16]: attribute must exist, otherwise error raised above</span>
@@ -347,7 +350,6 @@ src="/js/documentation_options.js">
         <span class="k">return</span> <span class="kc">None</span>
     <span class="c1"># Predict objective and P(feas) at these points</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">TorchModel</span><span class="p">):</span>
-        <span class="c1"># pyre-fixme[29]: `Union[() -&gt; Tensor, Any]` is not a function.</span>
         <span class="n">X_obs</span> <span class="o">=</span> <span class="n">X_obs</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
     <span class="n">f</span><span class="p">,</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">as_array</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_obs</span><span class="p">))</span>
     <span class="n">obj</span> <span class="o">=</span> <span class="n">objective_weights_np</span> <span class="o">@</span> <span class="n">f</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># pyre-ignore</span>
@@ -428,14 +430,26 @@ src="/js/documentation_options.js">
             <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">as_array</span><span class="p">(</span><span class="n">outcome_constraints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
         <span class="p">)</span>
     <span class="n">outcome_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">used_outcomes</span><span class="p">)</span>
+    <span class="c1"># pyre-fixme[16]: `Tensor` has no attribute `__iter__`.</span>
     <span class="n">X_obs_set</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Xs</span><span class="p">[</span><span class="n">outcome_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]}</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcome_list</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">X_obs_set</span> <span class="o">=</span> <span class="n">X_obs_set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span>
             <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Xs</span><span class="p">[</span><span class="n">idx</span><span class="p">]}</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># pyre-fixme[6]: Expected `Union[None, Dict[str, Tuple[typing.Any, int]],</span>
+        <span class="c1">#  Dict[str, Union[typing.Sequence[typing.Any], typing.Sequence[Union[None,</span>
+        <span class="c1">#  bytes, str]], typing.Sequence[int], typing.Sequence[str], int]],</span>
+        <span class="c1">#  List[Union[Tuple[Union[Tuple[str, str], str], typing.Any],</span>
+        <span class="c1">#  Tuple[Union[Tuple[str, str], str], typing.Any, Union[typing.Sequence[int],</span>
+        <span class="c1">#  int]]]], Tuple[typing.Any, typing.Any], Tuple[typing.Any,</span>
+        <span class="c1">#  Union[typing.Sequence[int], int]], Tuple[typing.Any, int],</span>
+        <span class="c1">#  typing.Type[typing.Any], np.dtype, str]` for 2nd param but got</span>
+        <span class="c1">#  `Union[np.dtype, torch.dtype]`.</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X_obs_set</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">Xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>  <span class="c1"># (n x d)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="c1"># pyre-fixme[7]: Expected `Union[np.ndarray, torch.Tensor]` but got implicit</span>
+        <span class="c1">#  return value of `None`.</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X_obs_set</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">Xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">Xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span></div>
 
 

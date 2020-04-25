@@ -192,7 +192,10 @@ src="/js/documentation_options.js">
             <span class="s2">"</span><span class="si">{name}</span><span class="s2">: </span><span class="si">{estimate}{perc}</span><span class="s2"> </span><span class="si">{ci}</span><span class="s2">&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="n">x_axis_var</span><span class="o">.</span><span class="n">metric</span> <span class="k">if</span> <span class="n">x_axis_label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">x_axis_label</span><span class="p">,</span>
                 <span class="n">estimate</span><span class="o">=</span><span class="p">(</span>
-                    <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">DECIMALS</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">DECIMALS</span><span class="p">)</span>
+                    <span class="c1"># pyre-fixme[25]: Assertion will always fail.</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="p">),</span>
                 <span class="n">ci</span><span class="o">=</span><span class="s2">""</span> <span class="k">if</span> <span class="n">x_se</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_format_CI</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_se</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rel_x</span><span class="p">),</span>
                 <span class="n">perc</span><span class="o">=</span><span class="s2">"%"</span> <span class="k">if</span> <span class="n">rel_x</span> <span class="k">else</span> <span class="s2">""</span><span class="p">,</span>
@@ -203,7 +206,10 @@ src="/js/documentation_options.js">
         <span class="n">y_lab</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{name}</span><span class="s2">: </span><span class="si">{estimate}{perc}</span><span class="s2"> </span><span class="si">{ci}</span><span class="s2">&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">y_axis_var</span><span class="o">.</span><span class="n">metric</span> <span class="k">if</span> <span class="n">y_axis_label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">y_axis_label</span><span class="p">,</span>
             <span class="n">estimate</span><span class="o">=</span><span class="p">(</span>
-                <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">DECIMALS</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">DECIMALS</span><span class="p">)</span>
+                <span class="c1"># pyre-fixme[25]: Assertion will always fail.</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)</span>
+                <span class="k">else</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="p">),</span>
             <span class="n">ci</span><span class="o">=</span><span class="s2">""</span> <span class="k">if</span> <span class="n">y_se</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_format_CI</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_se</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rel_y</span><span class="p">),</span>
             <span class="n">perc</span><span class="o">=</span><span class="s2">"%"</span> <span class="k">if</span> <span class="n">rel_y</span> <span class="k">else</span> <span class="s2">""</span><span class="p">,</span>
@@ -341,6 +347,9 @@ src="/js/documentation_options.js">
     <span class="p">):</span>
         <span class="n">traces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">_error_scatter_trace</span><span class="p">(</span>
+                <span class="c1"># pyre-fixme[6]: Expected `List[Union[PlotInSampleArm,</span>
+                <span class="c1">#  PlotOutOfSampleArm]]` for 1st param but got</span>
+                <span class="c1">#  `List[PlotOutOfSampleArm]`.</span>
                 <span class="nb">list</span><span class="p">(</span><span class="n">cand_arms</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
                 <span class="n">x_axis_var</span><span class="o">=</span><span class="n">PlotMetric</span><span class="p">(</span><span class="n">metric_x</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="n">rel_x</span><span class="p">),</span>
                 <span class="n">y_axis_var</span><span class="o">=</span><span class="n">PlotMetric</span><span class="p">(</span><span class="n">metric_y</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="n">rel_y</span><span class="p">),</span>
@@ -765,6 +774,9 @@ src="/js/documentation_options.js">
                 <span class="p">):</span>
                     <span class="n">fig</span><span class="o">.</span><span class="n">append_trace</span><span class="p">(</span>
                         <span class="n">_error_scatter_trace</span><span class="p">(</span>
+                            <span class="c1"># pyre-fixme[6]: Expected `List[Union[PlotInSampleArm,</span>
+                            <span class="c1">#  PlotOutOfSampleArm]]` for 1st param but got</span>
+                            <span class="c1">#  `List[PlotOutOfSampleArm]`.</span>
                             <span class="nb">list</span><span class="p">(</span><span class="n">cand_arms</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
                             <span class="n">x_axis_var</span><span class="o">=</span><span class="n">PlotMetric</span><span class="p">(</span><span class="n">o1</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="n">rel</span><span class="p">),</span>
                             <span class="n">y_axis_var</span><span class="o">=</span><span class="n">PlotMetric</span><span class="p">(</span><span class="n">o2</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="n">rel</span><span class="p">),</span>
@@ -1026,6 +1038,9 @@ src="/js/documentation_options.js">
     <span class="p">):</span>
         <span class="n">traces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">_error_scatter_trace</span><span class="p">(</span>
+                <span class="c1"># pyre-fixme[6]: Expected `List[Union[PlotInSampleArm,</span>
+                <span class="c1">#  PlotOutOfSampleArm]]` for 1st param but got</span>
+                <span class="c1">#  `List[PlotOutOfSampleArm]`.</span>
                 <span class="nb">list</span><span class="p">(</span><span class="n">cand_arms</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
                 <span class="n">x_axis_var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">y_axis_var</span><span class="o">=</span><span class="n">PlotMetric</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="n">rel</span><span class="p">),</span>

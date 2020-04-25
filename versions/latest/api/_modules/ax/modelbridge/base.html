@@ -151,7 +151,6 @@ src="/js/documentation_options.js">
             <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_signature</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">arms_by_signature</span>
 
         <span class="n">observations</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="c1"># pyre-fixme[6]: Expected `Experiment` for 1st param but got `None`.</span>
             <span class="n">observations_from_data</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
             <span class="k">else</span> <span class="p">[]</span>
@@ -443,7 +442,6 @@ src="/js/documentation_options.js">
         <span class="n">observation_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict</span><span class="p">(</span><span class="n">observation_features</span><span class="p">)</span>
 
         <span class="c1"># Apply reverse transforms, in reverse order</span>
-        <span class="c1"># pyre-fixme[6]: Expected `Sequence[_T]` for 1st param but got `ValuesView[Tr...</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>  <span class="c1"># noqa T484</span>
             <span class="n">observation_features</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">untransform_observation_features</span><span class="p">(</span>
                 <span class="n">observation_features</span>
@@ -646,7 +644,6 @@ src="/js/documentation_options.js">
         <span class="p">)</span>
 
         <span class="c1"># Apply reverse transforms</span>
-        <span class="c1"># pyre-fixme[6]: Expected `Sequence[_T]` for 1st param but got `ValuesView[Tr...</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>  <span class="c1"># noqa T484</span>
             <span class="n">observation_features</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">untransform_observation_features</span><span class="p">(</span>
                 <span class="n">observation_features</span>
@@ -743,7 +740,6 @@ src="/js/documentation_options.js">
             <span class="n">obs_feats</span><span class="o">=</span><span class="n">obs_feats</span><span class="p">,</span> <span class="n">obs_data</span><span class="o">=</span><span class="n">obs_data</span><span class="p">,</span> <span class="n">cv_test_points</span><span class="o">=</span><span class="n">cv_test_points</span>
         <span class="p">)</span>
         <span class="c1"># Apply reverse transforms, in reverse order</span>
-        <span class="c1"># pyre-fixme[6]: Expected `Sequence[_T]` for 1st param but got `ValuesView[Tr...</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="n">cv_test_points</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">untransform_observation_features</span><span class="p">(</span><span class="n">cv_test_points</span><span class="p">)</span>
             <span class="n">cv_predictions</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">untransform_observation_data</span><span class="p">(</span>

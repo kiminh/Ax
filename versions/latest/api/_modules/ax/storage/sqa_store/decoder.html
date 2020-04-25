@@ -709,7 +709,9 @@ src="/js/documentation_options.js">
         <span class="sd">"""Convert SQLAlchemy Trial to Ax Trial."""</span>
         <span class="k">if</span> <span class="n">trial_sqa</span><span class="o">.</span><span class="n">is_batch</span><span class="p">:</span>
             <span class="n">trial</span> <span class="o">=</span> <span class="n">BatchTrial</span><span class="p">(</span>
-                <span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span> <span class="n">optimize_for_power</span><span class="o">=</span><span class="n">trial_sqa</span><span class="o">.</span><span class="n">optimize_for_power</span>
+                <span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span>
+                <span class="n">optimize_for_power</span><span class="o">=</span><span class="n">trial_sqa</span><span class="o">.</span><span class="n">optimize_for_power</span><span class="p">,</span>
+                <span class="n">ttl_seconds</span><span class="o">=</span><span class="n">trial_sqa</span><span class="o">.</span><span class="n">ttl_seconds</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">generator_run_structs</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="n">GeneratorRunStruct</span><span class="p">(</span>
@@ -741,7 +743,7 @@ src="/js/documentation_options.js">
                 <span class="k">for</span> <span class="n">abandoned_arm_sqa</span> <span class="ow">in</span> <span class="n">trial_sqa</span><span class="o">.</span><span class="n">abandoned_arms</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">trial</span> <span class="o">=</span> <span class="n">Trial</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">)</span>
+            <span class="n">trial</span> <span class="o">=</span> <span class="n">Trial</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span> <span class="n">ttl_seconds</span><span class="o">=</span><span class="n">trial_sqa</span><span class="o">.</span><span class="n">ttl_seconds</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">trial_sqa</span><span class="o">.</span><span class="n">generator_runs</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">trial_sqa</span><span class="o">.</span><span class="n">generator_runs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">SQADecodeError</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>

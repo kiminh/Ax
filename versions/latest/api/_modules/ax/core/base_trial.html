@@ -152,10 +152,19 @@ src="/js/documentation_options.js">
 <span class="sd">    Args:</span>
 <span class="sd">        experiment: Experiment, of which this trial is a part</span>
 <span class="sd">        trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
+<span class="sd">        ttl_seconds: If specified, trials will be considered failed after</span>
+<span class="sd">            this many seconds since the time the trial was ran, unless the</span>
+<span class="sd">            trial is completed before then. Meant to be used to detect</span>
+<span class="sd">            'dead' trials, for which the evaluation process might have</span>
+<span class="sd">            crashed etc., and which should be considered failed after</span>
+<span class="sd">            their 'time to live' has passed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">Experiment</span><span class="p">,</span> <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">experiment</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">Experiment</span><span class="p">,</span>
+        <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Initialize trial.</span>
 
@@ -176,6 +185,9 @@ src="/js/documentation_options.js">
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">:</span> <span class="n">TrialStatus</span> <span class="o">=</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">CANDIDATE</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_created</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ttl_seconds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ttl_seconds</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"TTL must be a positive integer (or None)."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">ttl_seconds</span>
 
         <span class="c1"># Initialize fields to be used later in lifecycle</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_completed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -209,6 +221,26 @@ src="/js/documentation_options.js">
     <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TrialStatus</span><span class="p">:</span>
         <span class="sd">"""The status of the trial in the experimentation lifecycle."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ttl_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">"""This trial's time-to-live once ran, in seconds. If not set, trial</span>
+<span class="sd">        will never be automatically considered failed (i.e. infinite TTL).</span>
+<span class="sd">        Reflects after how many seconds since the time the trial was run it</span>
+<span class="sd">        will be considered failed unless completed.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_seconds</span>
+
+    <span class="nd">@ttl_seconds</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ttl_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Sets this trial's time-to-live once ran, in seconds. If None, trial</span>
+<span class="sd">        will never be automatically considered failed (i.e. infinite TTL).</span>
+<span class="sd">        Reflects after how many seconds since the time the trial was run it</span>
+<span class="sd">        will be considered failed unless completed.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">ttl_seconds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ttl_seconds</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"TTL must be a positive integer (or None)."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_seconds</span> <span class="o">=</span> <span class="n">ttl_seconds</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">completed_successfully</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -506,6 +538,30 @@ src="/js/documentation_options.js">
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">FAILED</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_completed</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="BaseTrial.mark_as"><a class="viewcode-back" href="../../../core.html#ax.core.base_trial.BaseTrial.mark_as">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">TrialStatus</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseTrial</span><span class="p">:</span>
+        <span class="sd">"""Mark trial with a new TrialStatus.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            status: The new status of the trial.</span>
+<span class="sd">            kwargs: Additional keyword args, as can be ued in the respective `mark_`</span>
+<span class="sd">                methods associated with the trial status.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The trial instance.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">STAGED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mark_staged</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="n">no_runner_required</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"no_runner_required"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mark_running</span><span class="p">(</span><span class="n">no_runner_required</span><span class="o">=</span><span class="n">no_runner_required</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">ABANDONED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mark_abandoned</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mark_failed</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">TrialStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mark_completed</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span></div></div>
 </pre></div>
 </div>

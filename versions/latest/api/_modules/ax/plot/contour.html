@@ -347,9 +347,13 @@ src="/js/documentation_options.js">
         <span class="n">is_log_dict</span><span class="p">[</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter</span><span class="o">.</span><span class="n">log_scale</span>
         <span class="n">grid_dict</span><span class="p">[</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_grid_for_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">density</span><span class="p">)</span>
 
+    <span class="c1"># pyre-fixme[9]: f_dict has type `Dict[str, Dict[str, np.ndarray]]`; used as</span>
+    <span class="c1">#  `Dict[str, Dict[str, typing.List[Variable[_T]]]]`.</span>
     <span class="n">f_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">param1</span><span class="p">:</span> <span class="p">{</span><span class="n">param2</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">param2</span> <span class="ow">in</span> <span class="n">param_names</span><span class="p">}</span> <span class="k">for</span> <span class="n">param1</span> <span class="ow">in</span> <span class="n">param_names</span>
     <span class="p">}</span>
+    <span class="c1"># pyre-fixme[9]: sd_dict has type `Dict[str, Dict[str, np.ndarray]]`; used as</span>
+    <span class="c1">#  `Dict[str, Dict[str, typing.List[Variable[_T]]]]`.</span>
     <span class="n">sd_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">param1</span><span class="p">:</span> <span class="p">{</span><span class="n">param2</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">param2</span> <span class="ow">in</span> <span class="n">param_names</span><span class="p">}</span> <span class="k">for</span> <span class="n">param1</span> <span class="ow">in</span> <span class="n">param_names</span>
     <span class="p">}</span>
@@ -445,7 +449,15 @@ src="/js/documentation_options.js">
         <span class="s2">"yaxis"</span><span class="p">:</span> <span class="s2">"y2"</span><span class="p">,</span>
     <span class="p">}</span>
 
+    <span class="c1"># pyre-fixme[6]: Expected `Mapping[str, typing.Union[Dict[str,</span>
+    <span class="c1">#  typing.Union[Dict[str, int], float, str]], typing.List[Tuple[float, str]], bool,</span>
+    <span class="c1">#  str]]` for 1st param but got `Dict[str, typing.Union[Dict[str, str], int,</span>
+    <span class="c1">#  str]]`.</span>
     <span class="n">f_contour_trace_base</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">CONTOUR_CONFIG</span><span class="p">)</span>
+    <span class="c1"># pyre-fixme[6]: Expected `Mapping[str, typing.Union[Dict[str,</span>
+    <span class="c1">#  typing.Union[Dict[str, int], float, str]], typing.List[Tuple[float, str]],</span>
+    <span class="c1">#  str]]` for 1st param but got `Dict[str, typing.Union[Dict[str, str], int,</span>
+    <span class="c1">#  str]]`.</span>
     <span class="n">sd_contour_trace_base</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">CONTOUR_CONFIG</span><span class="p">)</span>
 
     <span class="n">insample_param_values</span> <span class="o">=</span> <span class="p">{}</span>

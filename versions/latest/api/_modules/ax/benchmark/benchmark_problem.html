@@ -208,6 +208,8 @@ src="/js/documentation_options.js">
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"&lt;lambda&gt;"</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">ANONYMOUS_FUNCTION_ERROR</span><span class="p">)</span>
         <span class="c1"># If domain is `None`, grab it from the `SyntheticFunction`</span>
+        <span class="c1"># pyre-fixme[8]: Attribute has type `List[Tuple[float, float]]`; used as</span>
+        <span class="c1">#  `Union[List[Tuple[float, float]], List[typing.Tuple[float, ...]]]`.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span> <span class="ow">or</span> <span class="n">checked_cast</span><span class="p">(</span><span class="n">SyntheticFunction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">domain</span>
         <span class="k">if</span> <span class="n">optimal_value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_synthetic_function</span><span class="p">:</span>
             <span class="c1"># If no optimal_value is passed, try extracting it from synthetic function.</span>

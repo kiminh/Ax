@@ -361,7 +361,6 @@ src="/js/documentation_options.js">
             <span class="p">)</span>
         <span class="p">]</span>
         <span class="c1"># reverse loop through the transforms and do untransform</span>
-        <span class="c1"># pyre-fixme[6]: Expected `Sequence[_T]` for 1st param but got `ValuesView[Tr...</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="n">observation_features</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">untransform_observation_features</span><span class="p">(</span>
                 <span class="n">observation_features</span>
@@ -372,7 +371,11 @@ src="/js/documentation_options.js">
                 <span class="n">observation_features</span>
             <span class="p">)</span>
         <span class="n">new_x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="nb">float</span><span class="p">(</span><span class="n">observation_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">p</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
+            <span class="c1"># pyre-fixme[6]: Expected `Union[_SupportsIndex, bytearray, bytes, str,</span>
+            <span class="c1">#  typing.SupportsFloat]` for 1st param but got `Union[None, bool, float,</span>
+            <span class="c1">#  int, str]`.</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">observation_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
         <span class="p">]</span>
         <span class="c1"># turn it back into an array</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">new_x</span><span class="p">)</span>

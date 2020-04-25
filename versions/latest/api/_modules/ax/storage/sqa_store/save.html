@@ -47,6 +47,7 @@ src="/js/documentation_options.js">
     <span class="n">experiment</span><span class="p">:</span> <span class="n">Experiment</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SQAConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Save experiment (using default SQAConfig)."""</span>
+    <span class="c1"># pyre-fixme[25]: Assertion will always fail.</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">Experiment</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Can only save instances of Experiment"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">experiment</span><span class="o">.</span><span class="n">has_name</span><span class="p">:</span>

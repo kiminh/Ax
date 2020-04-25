@@ -109,6 +109,7 @@ src="/js/documentation_options.js">
     <span class="n">plotdivid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Convert plot config to corresponding JS code."""</span>
+    <span class="c1"># pyre-fixme[25]: Assertion will always fail.</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">AxPlotConfig</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Config must be instance of AxPlotConfig."</span><span class="p">)</span>
     <span class="n">js_template</span> <span class="o">=</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>

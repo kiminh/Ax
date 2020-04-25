@@ -75,7 +75,6 @@ src="/js/documentation_options.js">
 <span class="n">ONLY_ONE_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"experiment_id"</span><span class="p">,</span> <span class="s2">"generator_run_id"</span><span class="p">]</span>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAParameter"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAParameter">[docs]</a><span class="k">class</span> <span class="nc">SQAParameter</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"parameter_v2"</span>
 
@@ -106,7 +105,6 @@ src="/js/documentation_options.js">
     <span class="n">unique_id</span> <span class="o">=</span> <span class="s2">"name"</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAParameterConstraint"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAParameterConstraint">[docs]</a><span class="k">class</span> <span class="nc">SQAParameterConstraint</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"parameter_constraint_v2"</span>
 
@@ -123,7 +121,6 @@ src="/js/documentation_options.js">
     <span class="n">immutable_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"type"</span><span class="p">,</span> <span class="s2">"constraint_dict"</span><span class="p">,</span> <span class="s2">"bound"</span><span class="p">]</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAMetric"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAMetric">[docs]</a><span class="k">class</span> <span class="nc">SQAMetric</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"metric_v2"</span>
 
@@ -165,7 +162,6 @@ src="/js/documentation_options.js">
     <span class="n">scalarized_objective_weight</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Float</span><span class="p">)</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAArm"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAArm">[docs]</a><span class="k">class</span> <span class="nc">SQAArm</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"arm_v2"</span>
 
@@ -179,7 +175,6 @@ src="/js/documentation_options.js">
     <span class="n">unique_id</span> <span class="o">=</span> <span class="s2">"name"</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAAbandonedArm"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAAbandonedArm">[docs]</a><span class="k">class</span> <span class="nc">SQAAbandonedArm</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"abandoned_arm_v2"</span>
 
@@ -195,7 +190,6 @@ src="/js/documentation_options.js">
     <span class="n">unique_id</span> <span class="o">=</span> <span class="s2">"name"</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAGeneratorRun"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAGeneratorRun">[docs]</a><span class="k">class</span> <span class="nc">SQAGeneratorRun</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"generator_run_v2"</span>
 
@@ -244,7 +238,6 @@ src="/js/documentation_options.js">
     <span class="n">unique_id</span> <span class="o">=</span> <span class="s2">"index"</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQARunner"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQARunner">[docs]</a><span class="k">class</span> <span class="nc">SQARunner</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"runner"</span>
 
@@ -258,7 +251,6 @@ src="/js/documentation_options.js">
     <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">NAME_OR_TYPE_FIELD_LENGTH</span><span class="p">))</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAData"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAData">[docs]</a><span class="k">class</span> <span class="nc">SQAData</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"data_v2"</span>
 
@@ -275,7 +267,6 @@ src="/js/documentation_options.js">
     <span class="n">unique_id</span> <span class="o">=</span> <span class="s2">"time_created"</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAGenerationStrategy"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAGenerationStrategy">[docs]</a><span class="k">class</span> <span class="nc">SQAGenerationStrategy</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"generation_strategy"</span>
 
@@ -297,7 +288,6 @@ src="/js/documentation_options.js">
     <span class="p">)</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQATrial"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQATrial">[docs]</a><span class="k">class</span> <span class="nc">SQATrial</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"trial_v2"</span>
 
@@ -309,6 +299,7 @@ src="/js/documentation_options.js">
     <span class="n">is_batch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s2">"is_batched"</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">num_arms_created</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">optimize_for_power</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">run_metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">JSONEncodedTextDict</span><span class="p">)</span>
     <span class="n">status</span><span class="p">:</span> <span class="n">TrialStatus</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span>
         <span class="n">IntEnum</span><span class="p">(</span><span class="n">TrialStatus</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">TrialStatus</span><span class="o">.</span><span class="n">CANDIDATE</span>
@@ -343,7 +334,6 @@ src="/js/documentation_options.js">
     <span class="n">immutable_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"is_batch"</span><span class="p">]</span></div>
 
 
-<span class="c1"># pyre-fixme[11]: Type `Base` is not defined.</span>
 <div class="viewcode-block" id="SQAExperiment"><a class="viewcode-back" href="../../../../storage.html#ax.storage.sqa_store.sqa_classes.SQAExperiment">[docs]</a><span class="k">class</span> <span class="nc">SQAExperiment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"experiment_v2"</span>
 

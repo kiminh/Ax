@@ -562,16 +562,27 @@ src="/js/documentation_options.js">
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">trials_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TrialStatus</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTrial</span><span class="p">]]:</span>
-        <span class="sd">"""The trials associated with the experiment grouped by trial status."""</span>
+        <span class="sd">"""Trials associated with the experiment, grouped by trial status."""</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">output</span><span class="p">[</span><span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trial</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">trial_indices_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TrialStatus</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="sd">"""Indices of trials associated with the experiment, grouped by trial</span>
+<span class="sd">        status.</span>
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Experiment.new_trial"><a class="viewcode-back" href="../../../core.html#ax.Experiment.new_trial">[docs]</a>    <span class="k">def</span> <span class="nf">new_trial</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">generator_run</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GeneratorRun</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Trial</span><span class="p">:</span>
         <span class="sd">"""Create a new trial associated with this experiment.</span>
 
@@ -582,9 +593,18 @@ src="/js/documentation_options.js">
 <span class="sd">                or `add_generator_run`, but a trial's associated generator run is</span>
 <span class="sd">                immutable once set.</span>
 <span class="sd">            trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
+<span class="sd">            ttl_seconds: If specified, trials will be considered failed after</span>
+<span class="sd">                this many seconds since the time the trial was ran, unless the</span>
+<span class="sd">                trial is completed before then. Meant to be used to detect</span>
+<span class="sd">                'dead' trials, for which the evaluation process might have</span>
+<span class="sd">                crashed etc., and which should be considered failed after</span>
+<span class="sd">                their 'time to live' has passed.</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">Trial</span><span class="p">(</span>
-            <span class="n">experiment</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial_type</span><span class="o">=</span><span class="n">trial_type</span><span class="p">,</span> <span class="n">generator_run</span><span class="o">=</span><span class="n">generator_run</span>
+            <span class="n">experiment</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">trial_type</span><span class="o">=</span><span class="n">trial_type</span><span class="p">,</span>
+            <span class="n">generator_run</span><span class="o">=</span><span class="n">generator_run</span><span class="p">,</span>
+            <span class="n">ttl_seconds</span><span class="o">=</span><span class="n">ttl_seconds</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Experiment.new_batch_trial"><a class="viewcode-back" href="../../../core.html#ax.Experiment.new_batch_trial">[docs]</a>    <span class="k">def</span> <span class="nf">new_batch_trial</span><span class="p">(</span>
@@ -592,6 +612,7 @@ src="/js/documentation_options.js">
         <span class="n">generator_run</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GeneratorRun</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">optimize_for_power</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BatchTrial</span><span class="p">:</span>
         <span class="sd">"""Create a new batch trial associated with this experiment.</span>
 
@@ -604,6 +625,12 @@ src="/js/documentation_options.js">
 <span class="sd">                trial such that the experiment's power to detect effects of</span>
 <span class="sd">                certain size is as high as possible. Refer to documentation of</span>
 <span class="sd">                `BatchTrial.set_status_quo_and_optimize_power` for more detail.</span>
+<span class="sd">            ttl_seconds: If specified, trials will be considered failed after</span>
+<span class="sd">                this many seconds since the time the trial was ran, unless the</span>
+<span class="sd">                trial is completed before then. Meant to be used to detect</span>
+<span class="sd">                'dead' trials, for which the evaluation process might have</span>
+<span class="sd">                crashed etc., and which should be considered failed after</span>
+<span class="sd">                their 'time to live' has passed.</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="n">BatchTrial</span><span class="p">(</span>
             <span class="n">experiment</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
@@ -670,7 +697,7 @@ src="/js/documentation_options.js">
 
 <span class="sd">        Args:</span>
 <span class="sd">            arm: Arm to add</span>
-<span class="sd">"       """</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">signature</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_name</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
 

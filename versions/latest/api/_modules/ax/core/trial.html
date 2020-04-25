@@ -56,6 +56,12 @@ src="/js/documentation_options.js">
 <span class="sd">            or `add_generator_run`, but a trial's associated genetor run is</span>
 <span class="sd">            immutable once set.</span>
 <span class="sd">        trial_type: Type of this trial, if used in MultiTypeExperiment.</span>
+<span class="sd">        ttl_seconds: If specified, trials will be considered failed after</span>
+<span class="sd">            this many seconds since the time the trial was ran, unless the</span>
+<span class="sd">            trial is completed before then. Meant to be used to detect</span>
+<span class="sd">            'dead' trials, for which the evaluation process might have</span>
+<span class="sd">            crashed etc., and which should be considered failed after</span>
+<span class="sd">            their 'time to live' has passed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -63,8 +69,11 @@ src="/js/documentation_options.js">
         <span class="n">experiment</span><span class="p">:</span> <span class="s2">"core.experiment.Experiment"</span><span class="p">,</span>
         <span class="n">generator_run</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GeneratorRun</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">trial_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ttl_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span> <span class="n">trial_type</span><span class="o">=</span><span class="n">trial_type</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span> <span class="n">trial_type</span><span class="o">=</span><span class="n">trial_type</span><span class="p">,</span> <span class="n">ttl_seconds</span><span class="o">=</span><span class="n">ttl_seconds</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_generator_run</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">generator_run</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_generator_run</span><span class="p">(</span><span class="n">generator_run</span><span class="o">=</span><span class="n">generator_run</span><span class="p">)</span>
