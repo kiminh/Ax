@@ -248,7 +248,7 @@ src="/js/documentation_options.js">
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">is_deployed</span> <span class="ow">or</span> <span class="n">include_since_failed</span><span class="p">)</span>
                     <span class="ow">and</span> <span class="n">metric_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trial</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">()</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">metric_name</span><span class="o">.</span><span class="n">values</span>
-                    <span class="c1"># and trial.arms is not None</span>
+                    <span class="ow">and</span> <span class="n">trial</span><span class="o">.</span><span class="n">arms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
                 <span class="p">):</span>
                     <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="n">trial</span><span class="o">.</span><span class="n">arms</span><span class="p">:</span>
                         <span class="n">not_none</span><span class="p">(</span><span class="n">pending_features</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">metric_name</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>

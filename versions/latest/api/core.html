@@ -1290,6 +1290,27 @@ defined on the experiment.</p></li>
 </dl>
 </dd></dl>
 <dl class="method">
+<dt id="ax.core.experiment.Experiment.fetch_trials_data">
+<code class="sig-name descname">fetch_trials_data</code><span class="sig-paren">(</span><em class="sig-param">trial_indices</em>, <em class="sig-param">metrics=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/experiment.html#Experiment.fetch_trials_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.core.experiment.Experiment.fetch_trials_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches data for specific trials on the experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trial_indices</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Indices of trials, for which to fetch data.</p></li>
+<li><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#ax.core.metric.Metric" title="ax.core.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a>]]) – If provided, fetch data for these metrics instead of the ones
+defined on the experiment.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – Keyword args to pass to underlying metrics’ fetch data functions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Data for the specific trials on the experiment.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="method">
 <dt id="ax.core.experiment.Experiment.has_name">
 <em class="property">property </em><code class="sig-name descname">has_name</code><a class="headerlink" href="#ax.core.experiment.Experiment.has_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if experiment’s name is not None.</p>
@@ -1871,7 +1892,7 @@ an experiment object. To force-populate all fields of the
 <dd><p>Create a copy of this Metric.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#ax.core.metric.Metric" title="ax.core.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1889,7 +1910,7 @@ and concatenate the results.</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.core.metric.Metric.fetch_experiment_data_multi">
-<em class="property">classmethod </em><code class="sig-name descname">fetch_experiment_data_multi</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">metrics</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/metric.html#Metric.fetch_experiment_data_multi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.core.metric.Metric.fetch_experiment_data_multi" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">fetch_experiment_data_multi</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">metrics</em>, <em class="sig-param">trials=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/core/metric.html#Metric.fetch_experiment_data_multi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.core.metric.Metric.fetch_experiment_data_multi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch multiple metrics data for an experiment.</p>
 <p>Default behavior calls <cite>fetch_trial_data_multi</cite> for each trial.
 Subclasses should override to batch data computation across trials + metrics.</p>

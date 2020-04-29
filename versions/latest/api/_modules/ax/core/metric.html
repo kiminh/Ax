@@ -32,6 +32,8 @@ src="/js/documentation_options.js">
 <span class="c1"># This source code is licensed under the MIT license found in the</span>
 <span class="c1"># LICENSE file in the root directory of this source tree.</span>
 
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">ax.core.base</span> <span class="kn">import</span> <span class="n">Base</span>
@@ -65,16 +67,14 @@ src="/js/documentation_options.js">
         <span class="sd">"""Get name of metric."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
-<div class="viewcode-block" id="Metric.fetch_trial_data"><a class="viewcode-back" href="../../../core.html#ax.Metric.fetch_trial_data">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_trial_data</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="s2">"core.base_trial.BaseTrial"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Data</span><span class="p">:</span>
+<div class="viewcode-block" id="Metric.fetch_trial_data"><a class="viewcode-back" href="../../../core.html#ax.Metric.fetch_trial_data">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_trial_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">base_trial</span><span class="o">.</span><span class="n">BaseTrial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Data</span><span class="p">:</span>
         <span class="sd">"""Fetch data for one trial."""</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"Metric </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> does not implement data-fetching logic."</span>
         <span class="p">)</span>  <span class="c1"># pragma: no cover</span></div>
 
 <div class="viewcode-block" id="Metric.fetch_experiment_data"><a class="viewcode-back" href="../../../core.html#ax.Metric.fetch_experiment_data">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_experiment_data</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">:</span> <span class="s2">"core.experiment.Experiment"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">Experiment</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Data</span><span class="p">:</span>
         <span class="sd">"""Fetch this metric's data for an experiment.</span>
 
@@ -92,10 +92,7 @@ src="/js/documentation_options.js">
 
 <div class="viewcode-block" id="Metric.fetch_trial_data_multi"><a class="viewcode-back" href="../../../core.html#ax.Metric.fetch_trial_data_multi">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">fetch_trial_data_multi</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">trial</span><span class="p">:</span> <span class="s2">"core.base_trial.BaseTrial"</span><span class="p">,</span>
-        <span class="n">metrics</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="s2">"Metric"</span><span class="p">],</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">base_trial</span><span class="o">.</span><span class="n">BaseTrial</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Metric</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Data</span><span class="p">:</span>
         <span class="sd">"""Fetch multiple metrics data for one trial.</span>
 
@@ -109,8 +106,9 @@ src="/js/documentation_options.js">
 <div class="viewcode-block" id="Metric.fetch_experiment_data_multi"><a class="viewcode-back" href="../../../core.html#ax.Metric.fetch_experiment_data_multi">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">fetch_experiment_data_multi</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">experiment</span><span class="p">:</span> <span class="s2">"core.experiment.Experiment"</span><span class="p">,</span>
-        <span class="n">metrics</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="s2">"Metric"</span><span class="p">],</span>
+        <span class="n">experiment</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">Experiment</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Metric</span><span class="p">],</span>
+        <span class="n">trials</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">base_trial</span><span class="o">.</span><span class="n">BaseTrial</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Data</span><span class="p">:</span>
         <span class="sd">"""Fetch multiple metrics data for an experiment.</span>
@@ -123,7 +121,7 @@ src="/js/documentation_options.js">
                 <span class="bp">cls</span><span class="o">.</span><span class="n">fetch_trial_data_multi</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">expecting_data</span>
                 <span class="k">else</span> <span class="n">Data</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="p">(</span><span class="n">trials</span> <span class="ow">or</span> <span class="n">experiment</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
             <span class="p">]</span>
         <span class="p">)</span></div>
 
