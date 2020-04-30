@@ -74,7 +74,7 @@ hartmann_search_space = SearchSpace(
 
 
 exp = SimpleExperiment(
-    name="test_branin",
+    name="test_hartmann",
     search_space=hartmann_search_space,
     evaluation_function=hartmann_evaluation_function,
     objective_name="hartmann6",

@@ -384,7 +384,16 @@ src="/js/documentation_options.js">
         <span class="n">importances_tensor</span> <span class="o">=</span> <span class="n">not_none</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">feature_importances</span><span class="p">()</span>
         <span class="n">importances_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">importances_tensor</span><span class="p">))</span>
         <span class="n">importances_arr</span> <span class="o">=</span> <span class="n">importances_dict</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">importances_arr</span><span class="p">))</span></div></div>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">importances_arr</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_transform_observation_features</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ObservationFeatures</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">"""Apply terminal transform to given observation features and return result.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[[</span><span class="n">of</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">]</span> <span class="k">for</span> <span class="n">of</span> <span class="ow">in</span> <span class="n">observation_features</span><span class="p">]</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="array_to_observation_data"><a class="viewcode-back" href="../../../modelbridge.html#ax.modelbridge.array.array_to_observation_data">[docs]</a><span class="k">def</span> <span class="nf">array_to_observation_data</span><span class="p">(</span>

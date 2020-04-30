@@ -63,6 +63,11 @@ If <cite>max_parallelism</cite> trials from this step are already running, a cal
 to <cite>generation_strategy.gen</cite> will fail with a <cite>MaxParallelismReached
 Exception</cite>, indicating that more trials need to be completed before
 generating and running next trials.</p></li>
+<li><p><strong>use_update</strong> – Whether to use <cite>model_bridge.update</cite> instead or reinstantiating
+model + bridge on every call to <cite>gen</cite> within a single generation step.
+NOTE: use of <cite>update</cite> on stateful models that do not implement <cite>_get_state</cite>
+may result in inability to correctly resume a generation strategy from
+a serialized state.</p></li>
 <li><p><strong>enforce_num_trials</strong> – Whether to enforce that only <cite>num_trials</cite> are generated
 from the given step. If False and <cite>num_trials</cite> have been generated, but
 <cite>min_trials_observed</cite> have not been completed, <cite>generation_strategy.gen</cite>
@@ -88,12 +93,12 @@ Strategy</cite>. Do not assign as it will be reassigned when instantiating
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.enforce_num_trials">
 <em class="property">property </em><code class="sig-name descname">enforce_num_trials</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.enforce_num_trials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 4</p>
+<dd><p>Alias for field number 5</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.index">
 <em class="property">property </em><code class="sig-name descname">index</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 7</p>
+<dd><p>Alias for field number 8</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.max_parallelism">
@@ -113,12 +118,12 @@ Strategy</cite>. Do not assign as it will be reassigned when instantiating
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.model_gen_kwargs">
 <em class="property">property </em><code class="sig-name descname">model_gen_kwargs</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.model_gen_kwargs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 6</p>
+<dd><p>Alias for field number 7</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.model_kwargs">
 <em class="property">property </em><code class="sig-name descname">model_kwargs</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.model_kwargs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 5</p>
+<dd><p>Alias for field number 6</p>
 </dd></dl>
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.model_name">
@@ -133,6 +138,11 @@ Strategy</cite>. Do not assign as it will be reassigned when instantiating
 <dt id="ax.modelbridge.generation_strategy.GenerationStep.num_trials">
 <em class="property">property </em><code class="sig-name descname">num_trials</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.num_trials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
+</dd></dl>
+<dl class="method">
+<dt id="ax.modelbridge.generation_strategy.GenerationStep.use_update">
+<em class="property">property </em><code class="sig-name descname">use_update</code><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStep.use_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
 </dd></dl>
 </dd></dl>
 <dl class="class">
@@ -161,7 +171,7 @@ strategy’s name will be names of its steps’ models joined with ‘+’.</p><
 <dd><p>Copy this generation strategy without it’s state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#ax.modelbridge.generation_strategy.GenerationStrategy" title="ax.modelbridge.generation_strategy.GenerationStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenerationStrategy</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,10 +188,31 @@ strategy’s name will be names of its steps’ models joined with ‘+’.</p><
 <dl class="method">
 <dt id="ax.modelbridge.generation_strategy.GenerationStrategy.gen">
 <code class="sig-name descname">gen</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">data=None</em>, <em class="sig-param">n=1</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/generation_strategy.html#GenerationStrategy.gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.generation_strategy.GenerationStrategy.gen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Produce the next points in the experiment.</p>
+<dd><p>Produce the next points in the experiment. Additional kwargs passed to
+this method are propagated directly to the underlying model’s <cite>gen</cite>, along
+with the <cite>model_gen_kwargs</cite> set on the current generation step.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="core.html#ax.core.generator_run.GeneratorRun" title="ax.core.generator_run.GeneratorRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneratorRun</span></code></a></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>experiment</strong> (<a class="reference internal" href="core.html#ax.core.experiment.Experiment" title="ax.core.experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>) – Experiment, for which the generation strategy is producing
+a new generator run in the course of <cite>gen</cite>, and to which that
+generator run will be added as trial(s). Information stored on the
+experiment (e.g., trial statuses) is used to determine which model
+will be used to produce the generator run returned from this method.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="core.html#ax.core.data.Data" title="ax.core.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a>]) – Optional data to be passed to the underlying model’s <cite>gen</cite>, which
+is called within this method and actually produces the resulting
+generator run. By default, data is all data on the <cite>experiment</cite> if
+<cite>use_update</cite> is False and only the new data since the last call to
+this method if <cite>use_update</cite> is True.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Integer representing how many arms should be in the generator run
+produced by this method. NOTE: Some underlying models may ignore
+the <cite>n</cite> and produce a model-determined number of arms. In that
+case this method will also output a generator run with number of
+arms that can differ from <cite>n</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="core.html#ax.core.generator_run.GeneratorRun" title="ax.core.generator_run.GeneratorRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneratorRun</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -247,7 +278,7 @@ of this strategy.</p>
 and add them to the mapping of trials by generation step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -275,15 +306,6 @@ registered and therefore cannot be stored.</p>
 </dd>
 </dl>
 </dd></dl>
-</dd></dl>
-<dl class="exception">
-<dt id="ax.modelbridge.generation_strategy.MaxParallelismReachedException">
-<em class="property">exception </em><code class="sig-prename descclassname">ax.modelbridge.generation_strategy.</code><code class="sig-name descname">MaxParallelismReachedException</code><span class="sig-paren">(</span><em class="sig-param">step</em>, <em class="sig-param">num_running</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/generation_strategy.html#MaxParallelismReachedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.generation_strategy.MaxParallelismReachedException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
-<p>Special exception indicating that maximum number of trials running in
-parallel set on a given step (as <cite>GenerationStep.max_parallelism</cite>) has been
-reached. Upon getting this exception, users should wait until more trials
-are completed with data, to generate new trials.</p>
 </dd></dl>
 </div>
 <div class="section" id="module-ax.modelbridge.registry">
@@ -730,6 +752,24 @@ is in-design for the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="method">
+<dt id="ax.modelbridge.base.ModelBridge.transform_observation_features">
+<code class="sig-name descname">transform_observation_features</code><span class="sig-paren">(</span><em class="sig-param">observation_features</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/modelbridge/base.html#ModelBridge.transform_observation_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.modelbridge.base.ModelBridge.transform_observation_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies transforms to given observation features and returns them in the
+model space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observation_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="core.html#ax.core.observation.ObservationFeatures" title="ax.core.observation.ObservationFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationFeatures</span></code></a>]) – ObservationFeatures to be transformed.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Transformed values. This could be e.g. a torch Tensor, depending
+on the ModelBridge subclass.</p>
 </dd>
 </dl>
 </dd></dl>

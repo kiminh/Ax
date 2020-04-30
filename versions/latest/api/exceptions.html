@@ -112,6 +112,25 @@ The raw error is stored in the data_provider_error section,
 and an Ax-friendly message is stored as the actual error message.</p>
 </dd></dl>
 </div>
+<div class="section" id="module-ax.exceptions.generation_strategy">
+<span id="generation-strategy"></span><h2>Generation Strategy<a class="headerlink" href="#module-ax.exceptions.generation_strategy" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="ax.exceptions.generation_strategy.GenerationStrategyCompleted">
+<em class="property">exception </em><code class="sig-prename descclassname">ax.exceptions.generation_strategy.</code><code class="sig-name descname">GenerationStrategyCompleted</code><span class="sig-paren">(</span><em class="sig-param">message</em>, <em class="sig-param">hint=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/exceptions/generation_strategy.html#GenerationStrategyCompleted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.exceptions.generation_strategy.GenerationStrategyCompleted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ax.exceptions.core.AxError" title="ax.exceptions.core.AxError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ax.exceptions.core.AxError</span></code></a></p>
+<p>Special exception indicating that the generation strategy has been
+completed.</p>
+</dd></dl>
+<dl class="exception">
+<dt id="ax.exceptions.generation_strategy.MaxParallelismReachedException">
+<em class="property">exception </em><code class="sig-prename descclassname">ax.exceptions.generation_strategy.</code><code class="sig-name descname">MaxParallelismReachedException</code><span class="sig-paren">(</span><em class="sig-param">step_index</em>, <em class="sig-param">model_name</em>, <em class="sig-param">num_running</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ax/exceptions/generation_strategy.html#MaxParallelismReachedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ax.exceptions.generation_strategy.MaxParallelismReachedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ax.exceptions.core.AxError" title="ax.exceptions.core.AxError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ax.exceptions.core.AxError</span></code></a></p>
+<p>Special exception indicating that maximum number of trials running in
+parallel set on a given step (as <cite>GenerationStep.max_parallelism</cite>) has been
+reached. Upon getting this exception, users should wait until more trials
+are completed with data, to generate new trials.</p>
+</dd></dl>
+</div>
 <div class="section" id="module-ax.exceptions.model">
 <span id="model"></span><h2>Model<a class="headerlink" href="#module-ax.exceptions.model" title="Permalink to this headline">¶</a></h2>
 <dl class="exception">
@@ -170,6 +189,7 @@ and an Ax-friendly message is stored as the actual error message.</p>
 <li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.core">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.data_provider">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.generation_strategy">Generation Strategy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.model">Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ax.exceptions.storage">Storage</a></li>
 </ul>

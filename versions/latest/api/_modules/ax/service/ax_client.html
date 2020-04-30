@@ -415,6 +415,14 @@ src="/js/documentation_options.js">
             <span class="n">trial</span><span class="o">=</span><span class="n">trial</span><span class="p">,</span> <span class="n">raw_data</span><span class="o">=</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">sample_sizes</span><span class="o">=</span><span class="n">sample_sizes</span>
         <span class="p">)</span>
         <span class="n">trial</span><span class="o">.</span><span class="n">_run_metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span> <span class="ow">or</span> <span class="p">{})</span>
+        <span class="c1"># Registering trial data update is needed for generation strategies that</span>
+        <span class="c1"># leverage the `update` functionality of model and bridge setup and therefore</span>
+        <span class="c1"># need to be aware of new data added to experiment. Usually this happends</span>
+        <span class="c1"># seamlessly, by looking at newly completed trials, but in this case trial</span>
+        <span class="c1"># status does not change, so we manually register the new data.</span>
+        <span class="c1"># Currently this call will only result in a `NotImplementedError` if generation</span>
+        <span class="c1"># strategy uses `update` (`GenerationStep.use_update` is False by default).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">_register_trial_data_update</span><span class="p">(</span><span class="n">trial</span><span class="o">=</span><span class="n">trial</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">attach_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">combine_with_last_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">data_for_logging</span> <span class="o">=</span> <span class="n">_round_floats_for_logging</span><span class="p">(</span>
             <span class="n">item</span><span class="o">=</span><span class="n">evaluations</span><span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">evaluations</span><span class="o">.</span><span class="n">keys</span><span class="p">()))]</span>

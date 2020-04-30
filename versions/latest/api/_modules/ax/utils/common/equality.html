@@ -33,10 +33,11 @@ src="/js/documentation_options.js">
 <span class="c1"># LICENSE file in the root directory of this source tree.</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">ax.utils.common.typeutils</span> <span class="kn">import</span> <span class="n">numpy_type_to_python_type</span>
 
 
 <div class="viewcode-block" id="equality_typechecker"><a class="viewcode-back" href="../../../../utils.html#ax.storage.sqa_store.db.equality_typechecker">[docs]</a><span class="k">def</span> <span class="nf">equality_typechecker</span><span class="p">(</span><span class="n">eq_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
@@ -110,6 +111,60 @@ src="/js/documentation_options.js">
         <span class="n">equal</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">return</span> <span class="n">equal</span></div>
+
+
+<div class="viewcode-block" id="object_attribute_dicts_equal"><a class="viewcode-back" href="../../../../utils.html#ax.storage.sqa_store.db.object_attribute_dicts_equal">[docs]</a><span class="k">def</span> <span class="nf">object_attribute_dicts_equal</span><span class="p">(</span>
+    <span class="n">one_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">other_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">"""Utility to check if all items in attribute dicts of two Ax objects</span>
+<span class="sd">    are the same.</span>
+
+
+<span class="sd">    NOTE: Special-cases some Ax object attributes, like "_experiment" or</span>
+<span class="sd">    "_model", where full equality is hard to check.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">one_dict</span><span class="p">:</span>
+        <span class="n">one_val</span> <span class="o">=</span> <span class="n">one_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">other_val</span> <span class="o">=</span> <span class="n">other_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">one_val</span> <span class="o">=</span> <span class="n">numpy_type_to_python_type</span><span class="p">(</span><span class="n">one_val</span><span class="p">)</span>
+        <span class="n">other_val</span> <span class="o">=</span> <span class="n">numpy_type_to_python_type</span><span class="p">(</span><span class="n">other_val</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">one_val</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other_val</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="s2">"_experiment"</span><span class="p">:</span>
+            <span class="c1"># prevent infinite loop when checking equality of Trials</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">one_val</span> <span class="ow">is</span> <span class="n">other_val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">one_val</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other_val</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">field</span> <span class="o">==</span> <span class="s2">"_model"</span><span class="p">:</span>  <span class="c1"># pragma: no cover (tested in modelbridge)</span>
+            <span class="c1"># TODO[T52643706]: replace with per-`ModelBridge` method like</span>
+            <span class="c1"># `equivalent_models`, to compare models more meaningfully.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">):</span>
+                <span class="n">equal</span> <span class="o">=</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other_val</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If model bridges have a `model` attribute, the types of the</span>
+                <span class="c1"># values of those attributes should be equal if the model</span>
+                <span class="c1"># bridge is the same.</span>
+                <span class="n">equal</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">other_val</span><span class="o">.</span><span class="n">model</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">same_elements</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">other_val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">one_val</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">other_val</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">equal</span> <span class="ow">and</span> <span class="n">same_elements</span><span class="p">(</span>
+                <span class="nb">list</span><span class="p">(</span><span class="n">one_val</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">other_val</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">other_val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">datetime_equals</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">other_val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">other_val</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">dataframe_equals</span><span class="p">(</span><span class="n">one_val</span><span class="p">,</span> <span class="n">other_val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">equal</span> <span class="o">=</span> <span class="n">one_val</span> <span class="o">==</span> <span class="n">other_val</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
 </pre></div>
 </div>
 </div>

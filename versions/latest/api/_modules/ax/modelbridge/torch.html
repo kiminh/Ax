@@ -315,7 +315,14 @@ src="/js/documentation_options.js">
         <span class="n">tensor_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_array_to_tensor</span><span class="p">(</span><span class="n">array_func</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">tensor_func</span></div>
+        <span class="k">return</span> <span class="n">tensor_func</span>
+
+    <span class="k">def</span> <span class="nf">_transform_observation_features</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ObservationFeatures</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array_to_tensor</span><span class="p">(</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_transform_observation_features</span><span class="p">(</span><span class="n">observation_features</span><span class="p">)</span>
+        <span class="p">)</span></div>
 </pre></div>
 </div>
 </div>
