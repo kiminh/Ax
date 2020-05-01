@@ -92,7 +92,7 @@ src="/js/documentation_options.js">
     <span class="n">properties</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">exclude_args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"self"</span><span class="p">,</span> <span class="s2">"args"</span><span class="p">,</span> <span class="s2">"kwargs"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">exclude_fields</span> <span class="ow">or</span> <span class="p">[])</span>
     <span class="n">signature</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="nb">object</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">signature</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">signature</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">exclude_args</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">try</span><span class="p">:</span>
@@ -102,10 +102,6 @@ src="/js/documentation_options.js">
                 <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">object</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> is missing a value for </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">, "</span>
                 <span class="sa">f</span><span class="s2">"which is needed by its constructor."</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">default</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
-            <span class="c1"># If the constructor has a default value for the arg, and the</span>
-            <span class="c1"># object's value is the default, we do not need to store it</span>
-            <span class="k">continue</span>
         <span class="n">properties</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
     <span class="k">return</span> <span class="n">properties</span></div>
 </pre></div>

@@ -515,10 +515,17 @@ src="/js/documentation_options.js">
             <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_trials_data</span><span class="p">(</span>
                 <span class="n">trial_indices</span><span class="o">=</span><span class="n">newly_completed_trials</span>
             <span class="p">)</span>
+            <span class="k">if</span> <span class="n">new_data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Skipping model update as there is no new data."</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Skipping model update as data supplied to `gen` is empty."</span><span class="p">)</span>
+            <span class="k">return</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new_data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span>
                 <span class="n">df</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">trial_index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">newly_completed_trials</span><span class="p">)]</span>
             <span class="p">)</span>
+        <span class="c1"># We definitely have non-empty new data by now.</span>
         <span class="n">not_none</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span> <span class="n">new_data</span><span class="o">=</span><span class="n">new_data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_current_model_from_models_enum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

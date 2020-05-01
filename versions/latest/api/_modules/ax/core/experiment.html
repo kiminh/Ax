@@ -406,7 +406,7 @@ src="/js/documentation_options.js">
 <span class="sd">            Data for the specific trials on the experiment.</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_trials_data</span><span class="p">(</span>
-            <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_trials_by_indices</span><span class="p">(</span><span class="n">trial_indices</span><span class="o">=</span><span class="n">trial_indices</span><span class="p">),</span>
+            <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_trials_by_indices</span><span class="p">(</span><span class="n">trial_indices</span><span class="o">=</span><span class="n">trial_indices</span><span class="p">),</span>
             <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
@@ -521,6 +521,8 @@ src="/js/documentation_options.js">
 <span class="sd">        Returns:</span>
 <span class="sd">            Timestamp of storage in millis.</span>
 <span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Data to attach is empty."</span><span class="p">)</span>
         <span class="n">cur_time_millis</span> <span class="o">=</span> <span class="n">current_timestamp_in_millis</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">trial_index</span><span class="p">,</span> <span class="n">trial_df</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">"trial_index"</span><span class="p">]):</span>
             <span class="n">current_trial_data</span> <span class="o">=</span> <span class="p">(</span>
@@ -748,7 +750,7 @@ src="/js/documentation_options.js">
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">signature</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_name</span><span class="p">[</span><span class="n">arm</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">arm</span>
 
-    <span class="k">def</span> <span class="nf">_get_trials_by_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial_indices</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTrial</span><span class="p">]:</span>
+<div class="viewcode-block" id="Experiment.get_trials_by_indices"><a class="viewcode-back" href="../../../core.html#ax.Experiment.get_trials_by_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_trials_by_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial_indices</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTrial</span><span class="p">]:</span>
         <span class="sd">"""Grabs trials on this experiment by their indices."""</span>
         <span class="n">trial_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">trial_indices</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -757,7 +759,7 @@ src="/js/documentation_options.js">
             <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">trial_indices</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">"Trial indices </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2"> are not associated with the experiment."</span>
-            <span class="p">)</span>
+            <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Experiment.reset_runners"><a class="viewcode-back" href="../../../core.html#ax.Experiment.reset_runners">[docs]</a>    <span class="k">def</span> <span class="nf">reset_runners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runner</span><span class="p">:</span> <span class="n">Runner</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Replace all candidate trials runners.</span>
