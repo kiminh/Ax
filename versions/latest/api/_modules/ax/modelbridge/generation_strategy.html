@@ -35,6 +35,7 @@ src="/js/documentation_options.js">
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">signature</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -383,7 +384,9 @@ src="/js/documentation_options.js">
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span> <span class="o">=</span> <span class="n">experiment</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_or_update_model</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_trial_indices_by_status</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">trial_indices_by_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_trial_indices_by_status</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
+            <span class="n">experiment</span><span class="o">.</span><span class="n">trial_indices_by_status</span>
+        <span class="p">)</span>
         <span class="n">max_parallelism</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_curr</span><span class="o">.</span><span class="n">max_parallelism</span>
         <span class="n">num_running</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_running_trials_for_current_step</span>
         <span class="k">if</span> <span class="n">max_parallelism</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">num_running</span> <span class="o">&gt;=</span> <span class="n">max_parallelism</span><span class="p">:</span>
@@ -584,7 +587,7 @@ src="/js/documentation_options.js">
         <span class="n">completed_before</span> <span class="o">=</span> <span class="n">not_none</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seen_trial_indices_by_status</span><span class="p">)[</span>
             <span class="n">TrialStatus</span><span class="o">.</span><span class="n">COMPLETED</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">completed_now</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">completed_before</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">completed_now</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">completed_before</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_register_trial_data_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="n">BaseTrial</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Registers that a given trial has new data even though it's a trial that has</span>

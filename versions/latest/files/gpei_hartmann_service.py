@@ -25,7 +25,7 @@ init_notebook_plotting()
 # 
 # Create a client object to interface with Ax APIs. By default this runs locally without storage.
 
-# In[6]:
+# In[2]:
 
 
 ax_client = AxClient()
@@ -39,7 +39,7 @@ ax_client = AxClient()
 # - `parameter_constraints` should be a list of strings of form "p1 >= p2" or "p1 + p2 <= some_bound".
 # - `outcome_constraints` should be a list of strings of form "constrained_metric <= some_bound".
 
-# In[7]:
+# In[3]:
 
 
 ax_client.create_experiment(
@@ -121,7 +121,7 @@ for i in range(25):
 # ### How many trials can run in parallel?
 # By default, Ax restricts number of trials that can run in parallel for some optimization stages, in order to improve the optimization performance and reduce the number of trials that the optimization will require. To check the maximum parallelism for each optimization stage:
 
-# In[9]:
+# In[6]:
 
 
 ax_client.get_max_parallelism()
@@ -141,14 +141,14 @@ ax_client.generation_strategy.trials_as_df
 # 
 # Once it's complete, we can access the best parameters found, as well as the corresponding metric values.
 
-# In[ ]:
+# In[8]:
 
 
 best_parameters, values = ax_client.get_best_parameters()
 best_parameters
 
 
-# In[ ]:
+# In[9]:
 
 
 means, covariances = values
@@ -157,7 +157,7 @@ means
 
 # For comparison, Hartmann6 minimum:
 
-# In[ ]:
+# In[10]:
 
 
 hartmann6.fmin
@@ -166,7 +166,7 @@ hartmann6.fmin
 # ## 6. Plot the response surface and optimization trace
 # Here we arbitrarily select "x1" and "x2" as the two parameters to plot for both metrics, "hartmann6" and "l2norm".
 
-# In[ ]:
+# In[11]:
 
 
 render(ax_client.get_contour_plot())
@@ -174,7 +174,7 @@ render(ax_client.get_contour_plot())
 
 # We can also retrieve a contour plot for the other metric, "l2norm" –– say, we are interested in seeing the response surface for parameters "x3" and "x4" for this one.
 
-# In[ ]:
+# In[12]:
 
 
 render(ax_client.get_contour_plot(param_x="x3", param_y="x4", metric_name="l2norm"))
@@ -182,7 +182,7 @@ render(ax_client.get_contour_plot(param_x="x3", param_y="x4", metric_name="l2nor
 
 # Here we plot the optimization trace, showing the progression of finding the point with the optimal objective:
 
-# In[ ]:
+# In[13]:
 
 
 render(ax_client.get_optimization_trace(objective_optimum=hartmann6.fmin))  # Objective_optimum is optional.
@@ -191,13 +191,13 @@ render(ax_client.get_optimization_trace(objective_optimum=hartmann6.fmin))  # Ob
 # ## 7. Save / reload optimization to JSON / SQL
 # We can serialize the state of optimization to JSON and save it to a `.json` file or save it to the SQL backend. For the former:
 
-# In[ ]:
+# In[14]:
 
 
 ax_client.save_to_json_file()  # For custom filepath, pass `filepath` argument.
 
 
-# In[ ]:
+# In[15]:
 
 
 restored_ax_client = AxClient.load_from_json_file()  # For custom filepath, pass `filepath` argument.
@@ -207,7 +207,7 @@ restored_ax_client = AxClient.load_from_json_file()  # For custom filepath, pass
 
 # Having set up the SQL backend, pass `DBSettings` to `AxClient` on instantiation (note that `SQLAlchemy` dependency will have to be installed – for installation, refer to [optional dependencies](https://ax.dev/docs/installation.html#optional-dependencies) on Ax website):
 
-# In[ ]:
+# In[16]:
 
 
 from ax.storage.sqa_store.structs import DBSettings
@@ -226,7 +226,7 @@ new_ax = AxClient(db_settings=db_settings)
 
 # **Evaluation failure**: should any optimization iterations fail during evaluation, `log_trial_failure` will ensure that the same trial is not proposed again.
 
-# In[ ]:
+# In[17]:
 
 
 _, trial_index = ax_client.get_next_trial()
@@ -235,7 +235,7 @@ ax_client.log_trial_failure(trial_index=trial_index)
 
 # **Adding custom trials**: should there be need to evaluate a specific parameterization, `attach_trial` will add it to the experiment.
 
-# In[ ]:
+# In[18]:
 
 
 ax_client.attach_trial(parameters={"x1": 0.9, "x2": 0.9, "x3": 0.9, "x4": 0.9, "x5": 0.9, "x6": 0.9})
@@ -252,7 +252,7 @@ ax_client.attach_trial(parameters={"x1": 0.9, "x2": 0.9, "x3": 0.9, "x4": 0.9, "
 #  
 # In some cases higher parallelism is important, so `enforce_sequential_optimization=True` kwarg to AxClient allows to suppress limiting of parallelism. It's also possible to override the default parallelism setting for all stages of the optimization by passing `choose_generation_strategy_kwargs` to `ax_client.create_experiment`:
 
-# In[3]:
+# In[19]:
 
 
 ax_client = AxClient()
@@ -266,7 +266,7 @@ ax_client.create_experiment(
 )
 
 
-# In[5]:
+# In[20]:
 
 
 ax_client.get_max_parallelism()  # Max parallelism is now 10 for all stages of the optimization.

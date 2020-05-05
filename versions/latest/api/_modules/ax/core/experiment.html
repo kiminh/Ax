@@ -104,6 +104,10 @@ src="/js/documentation_options.js">
         <span class="bp">self</span><span class="o">.</span><span class="n">_tracking_metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_time_created</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_trials</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">BaseTrial</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Make sure all statuses appear in this dict, to avoid key errors.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trial_indices_by_status</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TrialStatus</span><span class="p">,</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">status</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">TrialStatus</span>
+        <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_signature</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Arm</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_arms_by_name</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Arm</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -611,10 +615,10 @@ src="/js/documentation_options.js">
     <span class="k">def</span> <span class="nf">trials_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TrialStatus</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTrial</span><span class="p">]]:</span>
         <span class="sd">"""Trials associated with the experiment, grouped by trial status."""</span>
         <span class="c1"># Make sure all statuses appear in this dict, to avoid key errors.</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="n">status</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">TrialStatus</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">output</span><span class="p">[</span><span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trial</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">status</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_trials_by_indices</span><span class="p">(</span><span class="n">trial_indices</span><span class="o">=</span><span class="n">idcs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">status</span><span class="p">,</span> <span class="n">idcs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trial_indices_by_status</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">trial_indices_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TrialStatus</span><span class="p">,</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
@@ -622,10 +626,7 @@ src="/js/documentation_options.js">
 <span class="sd">        status.</span>
 <span class="sd">        """</span>
         <span class="c1"># Make sure all statuses appear in this dict, to avoid key errors.</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="n">status</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">TrialStatus</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">output</span><span class="p">[</span><span class="n">trial</span><span class="o">.</span><span class="n">status</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trial_indices_by_status</span>
 
 <div class="viewcode-block" id="Experiment.new_trial"><a class="viewcode-back" href="../../../core.html#ax.Experiment.new_trial">[docs]</a>    <span class="k">def</span> <span class="nf">new_trial</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
