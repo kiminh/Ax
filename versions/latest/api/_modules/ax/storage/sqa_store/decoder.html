@@ -252,6 +252,8 @@ src="/js/documentation_options.js">
         <span class="n">experiment</span><span class="o">.</span><span class="n">_trials</span> <span class="o">=</span> <span class="p">{</span><span class="n">trial</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="n">trial</span> <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">}</span>
         <span class="n">experiment</span><span class="o">.</span><span class="n">_arms_by_name</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">trial</span><span class="o">.</span><span class="n">ttl_seconds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">experiment</span><span class="o">.</span><span class="n">_trials_have_ttl</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="n">trial</span><span class="o">.</span><span class="n">arms</span><span class="p">:</span>
                 <span class="n">experiment</span><span class="o">.</span><span class="n">_register_arm</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">status_quo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

@@ -1596,6 +1596,9 @@ status.</p>
 <dt id="ax.core.experiment.Experiment.trials">
 <em class="property">property </em><code class="sig-name descname">trials</code><a class="headerlink" href="#ax.core.experiment.Experiment.trials" title="Permalink to this definition">¶</a></dt>
 <dd><p>The trials associated with the experiment.</p>
+<p>NOTE: If some trials on this experiment specify their TTL, <cite>RUNNING</cite> trials
+will be checked for whether their TTL elapsed during this call. Found past-
+TTL trials will be marked as <cite>FAILED</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#ax.core.base_trial.BaseTrial" title="ax.core.base_trial.BaseTrial"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTrial</span></code></a>]</p>
