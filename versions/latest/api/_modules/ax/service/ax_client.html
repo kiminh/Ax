@@ -73,7 +73,7 @@ src="/js/documentation_options.js">
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">ax.storage.json_store.encoder</span> <span class="kn">import</span> <span class="n">object_to_json</span>
 <span class="kn">from</span> <span class="nn">ax.utils.common.docutils</span> <span class="kn">import</span> <span class="n">copy_doc</span>
-<span class="kn">from</span> <span class="nn">ax.utils.common.exec_utils</span> <span class="kn">import</span> <span class="n">retry_on_exception</span>
+<span class="kn">from</span> <span class="nn">ax.utils.common.executils</span> <span class="kn">import</span> <span class="n">retry_on_exception</span>
 <span class="kn">from</span> <span class="nn">ax.utils.common.logger</span> <span class="kn">import</span> <span class="n">_round_floats_for_logging</span><span class="p">,</span> <span class="n">get_logger</span>
 <span class="kn">from</span> <span class="nn">ax.utils.common.typeutils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">checked_cast</span><span class="p">,</span>
@@ -869,7 +869,7 @@ src="/js/documentation_options.js">
     <span class="nd">@retry_on_exception</span><span class="p">(</span>
         <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">default_return_on_suppression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">exception_type</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
+        <span class="n">exception_types</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">_save_experiment_to_db_if_possible</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">suppress_all_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -888,7 +888,7 @@ src="/js/documentation_options.js">
     <span class="nd">@retry_on_exception</span><span class="p">(</span>
         <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">default_return_on_suppression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">exception_type</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
+        <span class="n">exception_types</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">_save_new_trial_to_db_if_possible</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="n">BaseTrial</span><span class="p">,</span> <span class="n">suppress_all_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -909,7 +909,7 @@ src="/js/documentation_options.js">
     <span class="nd">@retry_on_exception</span><span class="p">(</span>
         <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">default_return_on_suppression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">exception_type</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
+        <span class="n">exception_types</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">_save_updated_trial_to_db_if_possible</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">:</span> <span class="n">BaseTrial</span><span class="p">,</span> <span class="n">suppress_all_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -930,7 +930,7 @@ src="/js/documentation_options.js">
     <span class="nd">@retry_on_exception</span><span class="p">(</span>
         <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">default_return_on_suppression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">exception_type</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
+        <span class="n">exception_types</span><span class="o">=</span><span class="n">retry_exception_type_tuple</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">_save_generation_strategy_to_db_if_possible</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">suppress_all_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1153,4 +1153,4 @@ src="/js/documentation_options.js">
 </div>
 </div>
 <div class="clearer"></div>
-</div></div></div><footer class="nav-footer" id="footer"><a href="https://code.facebook.com/projects/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/versions/latest/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Facebook Inc.</section></footer></div></body></html>
+</div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footerSection"><h5>Legal</h5><a href="https://opensource.facebook.com/legal/privacy/" target="_blank" rel="noreferrer noopener">Privacy</a><a href="https://opensource.facebook.com/legal/terms/" target="_blank" rel="noreferrer noopener">Terms</a></div></section><a href="https://code.facebook.com/projects/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/versions/latest/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Facebook Inc.</section></footer></div></body></html>
